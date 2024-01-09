@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Demo Market App"
+rootProject.name = "Kampus Demo App"
 include(":app")

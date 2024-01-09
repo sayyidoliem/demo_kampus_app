@@ -1,4 +1,4 @@
-package com.example.demomarketapp.ui.theme
+package com.example.kampusappdemo.ui.theme
 
 import android.app.Activity
 import android.os.Build

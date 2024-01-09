@@ -1,4 +1,4 @@
-package com.example.demomarketapp
+package com.example.kampusappdemo
 
 import org.junit.Test
 
