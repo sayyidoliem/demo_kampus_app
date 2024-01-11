@@ -24,12 +24,3 @@ data class BottomNavigationDemo(
 
     }
 }
-
-
-//object Home : BottomNavItem("home", Icons.Default.Home, "Home")
-//object Search : BottomNavItem("search", Icons.Default.Search, "Search")
-//
-//// dan seterusnya untuk item lainnya
-//object Payment : BottomNavItem("payment", Icons.Default.Payment, "Payment")
-//
-//object Profile : BottomNavItem("profile", Icons.Default.AccountCircle, "Profile")

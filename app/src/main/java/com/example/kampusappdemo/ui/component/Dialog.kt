@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,12 +21,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -228,7 +232,7 @@ fun EditProfileDialog(
                     )
                     Button(
                         onClick = { // TODO: send value to profile again
-                             },
+                        },
                         Modifier
                             .align(Alignment.End)
                             .padding(end = 16.dp, bottom = 16.dp, top = 8.dp)
@@ -249,4 +253,51 @@ fun EditProfileDialog(
             }
         }
     }
+}
+
+@Composable
+fun ChangeTranslateDialogDemo(
+    openDialog: () -> Unit
+) {
+    val radioOptions = listOf("English", "Indonesian")
+    var selectedOption by remember { mutableIntStateOf(SettingPreferences.isSelectedLanguage) }
+    AlertDialog(
+        onDismissRequest = { openDialog() },
+        title = { Text(text = "Select Language") },
+        icon = { Icon(imageVector = Icons.Default.Language, contentDescription = null) },
+        text = {
+            Column {
+                radioOptions.forEachIndexed { index, option ->
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = (index == selectedOption),
+                            onClick = {
+                                selectedOption = index
+                                SettingPreferences.isSelectedLanguage = index
+                            }
+                        )
+                        TextButton(onClick = {
+                            selectedOption = index
+                            SettingPreferences.isSelectedLanguage = index
+                        }) {
+                            Text(
+                                text = option,
+                                modifier = Modifier.padding(start = 8.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = { openDialog() }) {
+                Text("Confirm")
+            }
+        },
+    )
 }

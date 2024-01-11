@@ -6,6 +6,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 
+
+
+@Composable
+fun TextTitleDemo(
+    modifier: Modifier,
+    text: String
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.headlineMedium
+    )
+}
 @Composable
 fun TextHeadlineDemo(
     modifier: Modifier,
@@ -20,18 +34,17 @@ fun TextHeadlineDemo(
 }
 
 @Composable
-fun TextTitleDemo(
+fun TextSubHeadlineDemo(
     modifier: Modifier,
     text: String
 ) {
     Text(
         modifier = modifier,
         text = text,
-        fontWeight = FontWeight.Bold,
-        style = MaterialTheme.typography.headlineMedium
+        fontWeight = FontWeight.SemiBold,
+        style = MaterialTheme.typography.bodyLarge
     )
 }
-
 @Composable
 fun TextParagraphDemo(
     modifier: Modifier,

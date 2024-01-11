@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -26,7 +27,7 @@ fun TopAppBarHomeDemo() {
     TopAppBar(
         title = {
             Text(
-                text = "Lorem Ipsum \ndolor sit amet".uppercase(),
+                text = "Hello \nusername".uppercase(),
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleLarge,
             )
@@ -68,7 +69,8 @@ fun TopAppBarSearchDemo(
 @Composable
 fun TopAppBarDetailDemo() {
     TopAppBar(
-        title = { "/*TODO*/ " },
+        title = { // TODO:
+        },
         navigationIcon = {
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "backNavigation")
@@ -93,7 +95,7 @@ fun TopAppBarPaymentDemo() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBarProfileDemo(
-    onClick : () -> Unit
+    onClick: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         title = { Text(text = "Profile") },
@@ -108,14 +110,53 @@ fun TopAppBarProfileDemo(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBarSettingDemo(
-    onClick : () -> Unit
+    onClick: () -> Unit
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(text = "Setting") },
+        title = { Text(text = "Settings") },
         navigationIcon = {
             IconButton(onClick = { onClick() }) {
-                Icon(imageVector = Icons.Default.Settings, contentDescription = "")
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
             }
         },
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBarChatDemo(
+    navigate: () -> Unit,
+    onClick: () -> Unit
+) {
+    CenterAlignedTopAppBar(
+        title = { Text(text = "Chat") },
+        navigationIcon = {
+            IconButton(onClick = { navigate() }) {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
+            }
+        },
+        actions = {
+            IconButton(onClick = { onClick() }) {
+                Icon(imageVector = Icons.Default.MoreVert, contentDescription = "")
+            }
+        }
+    )
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBarSavedDemo() {
+    CenterAlignedTopAppBar(
+        title = { Text(text = "Saved") },
+
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBarBookingDemo() {
+    CenterAlignedTopAppBar(
+        title = { Text(text = "Booking") },
     )
 }

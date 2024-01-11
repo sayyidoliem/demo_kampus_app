@@ -1,5 +1,10 @@
 package com.example.kampusappdemo.utils
 
-object GlobalState {
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 
+object GlobalState {
+    var isDarkMode by mutableStateOf(SettingPreferences.isDarkMode)
 }

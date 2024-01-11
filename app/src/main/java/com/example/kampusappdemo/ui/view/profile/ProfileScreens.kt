@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AttachFile
+import androidx.compose.material.icons.filled.InsertDriveFile
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
@@ -36,25 +39,29 @@ import com.example.demomarketapp.R
 import com.example.kampusappdemo.ui.component.BottomAppBarProfileDemo
 import com.example.kampusappdemo.ui.component.CardProfileDemo
 import com.example.kampusappdemo.ui.component.EditProfileDialog
+import com.example.kampusappdemo.ui.component.ListItemDocumentSettingDemo
+import com.example.kampusappdemo.ui.component.ListItemIndentitySettingDemo
 import com.example.kampusappdemo.ui.component.TextHeadlineDemo
 import com.example.kampusappdemo.ui.component.TextParagraphDemo
 import com.example.kampusappdemo.ui.component.TopAppBarProfileDemo
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun ProfileScreens(
     modifier: Modifier,
-    viewModel: ProfileViewModel
+    viewModel: ProfileViewModel,
+    navigate: () -> Unit
 ) {
-    val openDialog by remember {
-        mutableStateOf(false)
-    }
+    val nameDummy = "aaa"
+    val phoneDummy = "0000000"
+    val emailDummy = "balbalblba@gmail.com"
+    val documentDummy = "rarrwrwr.pdf"
     Scaffold(
         modifier = modifier,
         topBar = {
-                 TopAppBarProfileDemo(onClick = {
-
-                 })
+            TopAppBarProfileDemo(onClick = {
+                navigate()
+            })
         },
         bottomBar = {
             BottomAppBarProfileDemo(
@@ -78,31 +85,37 @@ fun ProfileScreens(
                 contentDescription = "",
                 contentScale = ContentScale.Crop
             )
-            ListItem(
-                headlineContent = {
-                    Text(text = "Name")
-                },
-                supportingContent = {
-                    Text(text = "Aksa Akakaak")
-                }
+            ListItemIndentitySettingDemo(
+                headLineText = "Name",
+                supportText = nameDummy
             )
-            Divider()
-            ListItem(
-                headlineContent = {
-                    Text(text = "Phone Number")
-                },
-                supportingContent = {
-                    Text(text = "+123 - 4567 - 8910")
-                }
+            ListItemIndentitySettingDemo(
+                headLineText = "Phone Number",
+                supportText = phoneDummy
             )
-            Divider()
-            ListItem(
-                headlineContent = {
-                    Text(text = "E - Mail")
-                },
-                supportingContent = {
-                    Text(text = "Blablabla@gmail.com")
-                },
+            ListItemIndentitySettingDemo(
+                headLineText = "E - Mail",
+                supportText = emailDummy
+            )
+            ListItemDocumentSettingDemo(
+                headLineText = "Diploma Document",
+                supportText = documentDummy,
+                icon = Icons.Default.AttachFile
+            )
+            ListItemDocumentSettingDemo(
+                headLineText = "Certificate Document",
+                supportText = documentDummy,
+                icon = Icons.Default.AttachFile
+            )
+            ListItemDocumentSettingDemo(
+                headLineText = "Other Document",
+                supportText = documentDummy,
+                icon = Icons.Default.AttachFile
+            )
+            ListItemDocumentSettingDemo(
+                headLineText = "Other Document",
+                supportText = documentDummy,
+                icon = Icons.Default.AttachFile
             )
         }
     }

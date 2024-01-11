@@ -25,7 +25,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun DockedSearchBarDemo(
     p: String,
-    i: Boolean
+    i: Boolean,
+    isShowSearchBar : () -> Unit
 ) {
     var textSearchBar by rememberSaveable { mutableStateOf("") }
     var searchBar by rememberSaveable { mutableStateOf(false) }
@@ -53,7 +54,16 @@ fun DockedSearchBarDemo(
             }
         },
         leadingIcon = {
-
+            if (searchBar) {
+                IconButton(onClick = {
+                    searchBar = !searchBar; isShowSearchBar()
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = null
+                    )
+                }
+            }
         },
         modifier = Modifier
             .fillMaxWidth()
