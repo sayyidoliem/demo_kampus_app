@@ -1,1 +1,1 @@
-Demo Market App project
+Demo Kampus App project
