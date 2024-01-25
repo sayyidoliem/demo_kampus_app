@@ -9,13 +9,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,6 +43,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.kampusappdemo.data.local.database.University
 import com.example.kampusappdemo.data.kotpref.SettingPreferences
 
 @Composable
@@ -300,4 +304,87 @@ fun ChangeTranslateDialogDemo(
             }
         },
     )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TermsConditionDialog(
+    openDialog: () -> Unit,
+    onConfirmation: () -> Unit,
+) {
+    val (checkedState, onStateChange) = remember { mutableStateOf(false) }
+    Dialog(
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false
+        ),
+        onDismissRequest = { openDialog() }
+    ) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = when (SettingPreferences.isSelectedLanguage) {
+                                SettingPreferences.ENGLISH -> {
+                                    "Terms & Condition"
+                                }
+
+                                else -> {
+                                    "Syarat dan Ketentuan"
+                                }
+                            },
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { openDialog() }) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = null
+                            )
+                        }
+                    },
+                )
+            }
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it)
+                    .background(MaterialTheme.colorScheme.surface),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .padding(16.dp)
+                ) {
+                    TextHeadlineDemo(modifier = Modifier, text = "Terms")
+                    TextParagraphDemo(
+                        modifier = Modifier,
+                        text = "Lorem Ipsum Dolor sit amet bkgweeeeee"
+                    )
+                    TextHeadlineDemo(modifier = Modifier, text = "Terms")
+                    TextParagraphDemo(
+                        modifier = Modifier,
+                        text = University.KAMPUS_1.universityDescription
+                    )
+                    Row(modifier = Modifier.align(Alignment.End).padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Text(text = "I have read the terms and condition")
+                        Checkbox(
+                            checked = checkedState,
+                            onCheckedChange = { onStateChange(!checkedState) } // null recommended for accessibility with screenreaders
+                        )
+                    }
+                    Button(
+                        modifier = Modifier.align(Alignment.End),
+                        enabled = checkedState,
+                        onClick = { onConfirmation() }
+                    ) {
+                        Text(text = "Register")
+                    }
+                }
+            }
+        }
+    }
 }

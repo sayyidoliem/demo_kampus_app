@@ -1,9 +1,11 @@
 package com.example.kampusappdemo.ui.component
 
+import android.icu.text.CaseMap.Title
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Message
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
@@ -23,23 +25,20 @@ import com.example.demomarketapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarHomeDemo() {
+fun TopAppBarHomeDemo(
+    onClick: () -> Unit
+) {
     TopAppBar(
         title = {
             Text(
-                text = "Hello \nusername".uppercase(),
+                text = "Hello, \nusername".uppercase(),
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleMedium,
             )
         },
         actions = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Image(
-                    modifier = Modifier
-                        .clip(shape = CircleShape),
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = ""
-                )
+            IconButton(onClick = { onClick() }) {
+                Icon(imageVector = Icons.Default.Message, contentDescription = "chat")
             }
         }
     )
@@ -81,11 +80,13 @@ fun TopAppBarDetailDemo() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarPaymentDemo() {
+fun TopAppBarPaymentDemo(
+    onClick: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = { Text(text = "Payment") },
         navigationIcon = {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { onClick() }) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
             }
         },
@@ -150,7 +151,7 @@ fun TopAppBarSavedDemo() {
     CenterAlignedTopAppBar(
         title = { Text(text = "Saved") },
 
-    )
+        )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -158,5 +159,21 @@ fun TopAppBarSavedDemo() {
 fun TopAppBarBookingDemo() {
     CenterAlignedTopAppBar(
         title = { Text(text = "Booking") },
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBarListDemo(
+    title: String,
+    navigate: () -> Unit
+) {
+    CenterAlignedTopAppBar(
+        title = { Text(text = title) },
+        navigationIcon = {
+            IconButton(onClick = { navigate() }) {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "back")
+            }
+        }
     )
 }

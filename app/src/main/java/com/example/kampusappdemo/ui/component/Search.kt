@@ -13,6 +13,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,10 +27,11 @@ import kotlinx.coroutines.launch
 fun DockedSearchBarDemo(
     p: String,
     i: Boolean,
-    isShowSearchBar : () -> Unit
+    isShowSearchBar: () -> Unit
 ) {
     var textSearchBar by rememberSaveable { mutableStateOf("") }
     var searchBar by rememberSaveable { mutableStateOf(false) }
+
     DockedSearchBar(
         query = textSearchBar,
         onQueryChange = { textSearchBar = it },
@@ -49,20 +51,14 @@ fun DockedSearchBarDemo(
                         contentDescription = null
                     )
                 }
-            } else IconButton(onClick = { searchBar = true }) {
-                Icon(imageVector = Icons.Default.Search, contentDescription = null)
             }
         },
         leadingIcon = {
-            if (searchBar) {
-                IconButton(onClick = {
-                    searchBar = !searchBar; isShowSearchBar()
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = null
-                    )
-                }
+            IconButton(onClick = { }) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null
+                )
             }
         },
         modifier = Modifier

@@ -1,4 +1,4 @@
-package com.example.kampusappdemo.data.database
+package com.example.kampusappdemo.data.local.database
 
 import com.example.demomarketapp.R
 
@@ -8,7 +8,9 @@ enum class University(
     val universityImage: Int,
     val universityLocation: String,
     val universityDescription: String,
-    val universityStudyProgram: List<String>
+    val universityStudyProgram: List<String>,
+    val universityRating : Float,
+    val universityType: String
 ) {
     KAMPUS_1(
         1,
@@ -16,7 +18,9 @@ enum class University(
         R.drawable.kampus1,
         "Bekasi",
         loremIpsum,
-        Prodi
+        Prodi,
+        2.4F,
+        "private"
     ),
     KAMPUS_2(
         2,
@@ -24,7 +28,9 @@ enum class University(
         R.drawable.kampus2,
         "Jakarta Timur",
         loremIpsum,
-        Prodi
+        Prodi,
+        4.5F,
+        "public"
     ),
     KAMPUS_3(
         3,
@@ -32,7 +38,9 @@ enum class University(
         R.drawable.kampus3,
         "Tangerang Selatan",
         loremIpsum,
-        Prodi
+        Prodi,
+        4.8F,
+        "private"
     ),
     KAMPUS_4(
         4,
@@ -40,7 +48,9 @@ enum class University(
         R.drawable.kampus4,
         "Ngawi",
         loremIpsum,
-        Prodi
+        Prodi,
+        2.3F,
+        "public"
     ),
     KAMPUS_5(
         5,
@@ -48,7 +58,9 @@ enum class University(
         R.drawable.kampus5,
         "Probolinggo",
         loremIpsum,
-        Prodi
+        Prodi,
+        4.2F,
+        "private"
     ),
     KAMPUS_6(
         6,
@@ -56,7 +68,9 @@ enum class University(
         R.drawable.kampus6,
         "Jogja",
         loremIpsum,
-        Prodi
+        Prodi,
+        3.4F,
+        "private"
     ),
     KAMPUS_7(
         7,
@@ -64,7 +78,9 @@ enum class University(
         R.drawable.kampus7,
         "Solo",
         loremIpsum,
-        Prodi
+        Prodi,
+        4.7F,
+        "public"
     ),
     KAMPUS_8(
         8,
@@ -72,7 +88,9 @@ enum class University(
         R.drawable.kampus8,
         "Cirebon",
         loremIpsum,
-        Prodi
+        Prodi,
+        1.6F,
+        "private"
     ),
     KAMPUS_9(
         9,
@@ -80,7 +98,9 @@ enum class University(
         R.drawable.kampus9,
         "Cilegon",
         loremIpsum,
-        Prodi
+        Prodi,
+        3.3F,
+        "private"
     ),
     KAMPUS_10(
         10,
@@ -88,7 +108,9 @@ enum class University(
         R.drawable.kampus10,
         "Jakarta Barat",
         loremIpsum,
-        Prodi
+        Prodi,
+        5.0F,
+        "public"
     ),
 }
 

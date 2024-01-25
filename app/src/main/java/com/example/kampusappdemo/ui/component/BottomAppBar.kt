@@ -76,7 +76,8 @@ fun BottomAppBarDemo(
 @Composable
 fun BottomAppBarDetailDemo(
     onClickFAQ: () -> Unit,
-    onClickRegister: () -> Unit
+    onClickRegister: () -> Unit,
+    registerEnabled : Boolean
 ) {
     Row(
         modifier = Modifier
@@ -91,6 +92,7 @@ fun BottomAppBarDetailDemo(
         }
         Spacer(modifier = Modifier.padding(8.dp))
         Button(
+            enabled = registerEnabled,
             modifier = Modifier.weight(0.5F),
             onClick = {
                 onClickRegister()

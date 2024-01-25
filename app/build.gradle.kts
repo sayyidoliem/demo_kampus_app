@@ -55,7 +55,7 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation(platform("androidx.compose:compose-bom:2023.09.01"))
     implementation("androidx.compose.ui:ui")
@@ -82,10 +82,10 @@ dependencies {
     //converter gson
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    //for async image
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
-
-
-    val roomVersion = "2.5.0"
+    val roomVersion = "2.6.0"
 
     implementation("androidx.room:room-runtime:$roomVersion")
 
