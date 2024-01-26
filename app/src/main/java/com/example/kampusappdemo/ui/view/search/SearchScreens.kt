@@ -74,7 +74,7 @@ fun SearchScreens(
     val filteredData = remember { mutableStateOf(listOf<EducationData>()) }
 
     // Gunakan LaunchedEffect untuk memuat data saat Composable pertama kali dipanggil
-    LaunchedEffect(true) {
+    LaunchedEffect(Unit) {
         scope.launch {
             data.value = viewModel.dataList(context)
             filteredData.value = viewModel.filterDataBySearch(data.value, text)
@@ -112,7 +112,7 @@ fun SearchScreens(
                     }
                 },
                 leadingIcon = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { viewModel.onToogleSearch() }) {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = null
@@ -128,17 +128,32 @@ fun SearchScreens(
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    items(filteredData.value) { educationData ->
-                        val resultText = educationData.name
-                        ListItem(
-                            modifier = Modifier.clickable {
-                                text = resultText
-                                viewModel.onToogleSearch()
-                            },
-                            overlineContent = { Text(text = educationData.instance) },
-                            headlineContent = { Text(text = resultText) },
-                            supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
-                        )
+                    if (text.isEmpty()) {
+                        items(list) { educationData ->
+                            val resultText = educationData.name
+                            ListItem(
+                                modifier = Modifier.clickable {
+                                    text = resultText
+                                    viewModel.onToogleSearch()
+                                },
+                                overlineContent = { Text(text = educationData.instance) },
+                                headlineContent = { Text(text = resultText) },
+                                supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
+                            )
+                        }
+                    } else {
+                        items(filteredData.value) { educationData ->
+                            val resultText = educationData.name
+                            ListItem(
+                                modifier = Modifier.clickable {
+                                    text = resultText
+                                    viewModel.onToogleSearch()
+                                },
+                                overlineContent = { Text(text = educationData.instance) },
+                                headlineContent = { Text(text = resultText) },
+                                supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
+                            )
+                        }
                     }
                 }
             }
@@ -167,26 +182,50 @@ fun SearchScreens(
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2)
             ) {
-                items(filteredData.value) { educationData ->
-                    ListItem(headlineContent = { Text(text = educationData.name) })
-                    CardListSearchDemo(
-                        nameCampus = educationData.name,
-                        typeCampus = educationData.instance,
-                        ratingCampus = educationData.rating,
-                        image = educationData.image,
-                        location = educationData.location.city,
-                        onClick = {
-                            navigate(
-                                educationData.name,
-                                educationData.instance,
-                                educationData.rating.toFloat(),
-                                educationData.location.city,
-                                educationData.image,
-                                educationData.description.toString(),
-                            )
-                        },
-                    )
+                if (text.isEmpty()) {
+                    items(list) { educationData ->
+                        ListItem(headlineContent = { Text(text = educationData.name) })
+                        CardListSearchDemo(
+                            nameCampus = educationData.name,
+                            typeCampus = educationData.instance,
+                            ratingCampus = educationData.rating,
+                            image = educationData.image,
+                            location = educationData.location.city,
+                            onClick = {
+                                navigate(
+                                    educationData.name,
+                                    educationData.instance,
+                                    educationData.rating.toFloat(),
+                                    educationData.location.city,
+                                    educationData.image,
+                                    educationData.description.toString(),
+                                )
+                            },
+                        )
+                    }
+                } else {
+                    items(filteredData.value) { educationData ->
+                        ListItem(headlineContent = { Text(text = educationData.name) })
+                        CardListSearchDemo(
+                            nameCampus = educationData.name,
+                            typeCampus = educationData.instance,
+                            ratingCampus = educationData.rating,
+                            image = educationData.image,
+                            location = educationData.location.city,
+                            onClick = {
+                                navigate(
+                                    educationData.name,
+                                    educationData.instance,
+                                    educationData.rating.toFloat(),
+                                    educationData.location.city,
+                                    educationData.image,
+                                    educationData.description.toString(),
+                                )
+                            },
+                        )
+                    }
                 }
+
             }
         }
     }

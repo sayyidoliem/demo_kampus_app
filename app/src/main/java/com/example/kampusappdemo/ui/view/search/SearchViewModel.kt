@@ -59,25 +59,11 @@ class SearchViewModel() : ViewModel() {
     }
 
     fun filterDataBySearch(data: List<EducationData>, name: String): MutableList<EducationData> {
-//        val data = dataList(context)context: Context,
         return data.filter {
-            it.name == name || it.instance == name || it.location.city == name || it.location.province == name
+            it.name.contains(name, ignoreCase = true)
+                    || it.instance.contains(name, ignoreCase = true)
+                    || it.location.city.contains(name, ignoreCase = true)
+                    || it.location.province.contains(name, ignoreCase = true)
         }.toMutableList()
     }
-
-//    //third state the list to be filtered
-//    private val _countriesList = MutableStateFlow(countries)
-//    val countriesList = searchText
-//        .combine(_countriesList) { text, countries ->//combine searchText with _contriesList
-//            if (text.isBlank()) { //return the entery list of countries if not is typed
-//                countries
-//            }
-//            countries.filter { country ->// filter and return a list of countries based on the text the user typed
-//                country.uppercase().contains(text.trim().uppercase())
-//            }
-//        }.stateIn(//basically convert the Flow returned from combine operator to StateFlow
-//            scope = viewModelScope,
-//            started = SharingStarted.WhileSubscribed(5000),//it will allow the StateFlow survive 5 seconds before it been canceled
-//            initialValue = _countriesList.value
-//        )
 }
