@@ -1,6 +1,5 @@
 package com.example.kampusappdemo.ui.view.home
 
-import android.content.res.AssetManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,22 +18,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.kampusappdemo.data.local.database.University
 import com.example.kampusappdemo.ui.component.CardLastSeenHomeDemo
 import com.example.kampusappdemo.ui.component.CardListHomeDemo
 import com.example.kampusappdemo.ui.component.TextHeadlineDemo
-import com.example.kampusappdemo.ui.component.TextParagraphDemo
 import com.example.kampusappdemo.ui.component.TextSubHeadlineDemo
-import com.example.kampusappdemo.ui.component.TextTitleDemo
 import com.example.kampusappdemo.ui.component.TopAppBarHomeDemo
 
 @Composable
 fun HomeScreens(
     viewModel: HomeViewModel,
-    navigate: (name: String?, type: String?, rating : Float?, city: String?, image: Int?, desc: String?) -> Unit,
+    navigate: (name: String?, type: String?, rating : Float?, city: String?, image: String?, desc: String?) -> Unit,
     actionTopBar: () -> Unit
 ) {
+    val context = LocalContext.current
+    val list = viewModel.dataList(context)
+    val listLastSeen = viewModel.filterDataByLastSeen(context)
     Scaffold(
         topBar = {
             TopAppBarHomeDemo(
@@ -53,23 +54,26 @@ fun HomeScreens(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = "Last seen with you"
             )
-            CardLastSeenHomeDemo(
-                nameCampus = dataDummy.universityName,
-                typeCampus = dataDummy.universityType,
-                ratingCampus = dataDummy.universityRating,
-                location = dataDummy.universityLocation,
-                image = dataDummy.universityImage,
-                onClick = {
-                    navigate(
-                        dataDummy.universityName,
-                        dataDummy.universityType,
-                        dataDummy.universityRating,
-                        dataDummy.universityLocation,
-                        dataDummy.universityImage,
-                        dataDummy.universityDescription,
-                    )
-                },
-            )
+            listLastSeen.forEach {educationData->
+                CardLastSeenHomeDemo(
+                    nameCampus = educationData.name,
+                    typeCampus = educationData.instance,
+                    ratingCampus = educationData.rating,
+                    location = educationData.location,
+                    image = educationData.image,
+                    onClick = {
+                        navigate(
+                            educationData.name,
+                            educationData.instance,
+                            educationData.rating.toFloat(),
+                            educationData.location.city,
+                            educationData.image,
+                            educationData.description.toString(),
+                        )
+                    }
+                )
+            }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -90,24 +94,23 @@ fun HomeScreens(
                 }
             }
             LazyRow(modifier = Modifier.fillMaxWidth()) {
-                items(University.values()) { university ->
+                items(list) { educationData ->
                     CardListHomeDemo(
-                        nameCampus = university.universityName,
-                        typeCampus = university.universityType,
-                        ratingCampus = university.universityRating,
-                        location = university.universityLocation,
-                        image = university.universityImage,
-                        onClick = {
-                            navigate(
-                                university.universityName,
-                                university.universityType,
-                                university.universityRating,
-                                university.universityLocation,
-                                university.universityImage,
-                                university.universityDescription,
-                            )
-                        }
-                    )
+                        nameCampus = educationData.name,
+                        typeCampus = educationData.instance,
+                        ratingCampus = educationData.rating,
+                        location = educationData.location,
+                        image = educationData.image
+                    ) {
+                        navigate(
+                            educationData.name,
+                            educationData.instance,
+                            educationData.rating.toFloat(),
+                            educationData.location.city,
+                            educationData.image,
+                            educationData.description.toString(),
+                        )
+                    }
                 }
             }
             Row(
@@ -132,24 +135,23 @@ fun HomeScreens(
             }
 
             LazyRow(modifier = Modifier.fillMaxWidth()) {
-                items(University.values()) { university ->
+                items(list) { educationData ->
                     CardListHomeDemo(
-                        nameCampus = university.universityName,
-                        typeCampus = university.universityType,
-                        ratingCampus = university.universityRating,
-                        location = university.universityLocation,
-                        image = university.universityImage,
-                        onClick = {
-                            navigate(
-                                university.universityName,
-                                university.universityType,
-                                university.universityRating,
-                                university.universityLocation,
-                                university.universityImage,
-                                university.universityDescription,
-                            )
-                        }
-                    )
+                        nameCampus = educationData.name,
+                        typeCampus = educationData.instance,
+                        ratingCampus = educationData.rating,
+                        location = educationData.location,
+                        image = educationData.image
+                    ) {
+                        navigate(
+                            educationData.name,
+                            educationData.instance,
+                            educationData.rating.toFloat(),
+                            educationData.location.city,
+                            educationData.image,
+                            educationData.description.toString(),
+                        )
+                    }
                 }
             }
         }

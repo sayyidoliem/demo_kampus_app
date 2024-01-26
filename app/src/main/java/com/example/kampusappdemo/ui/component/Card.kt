@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Circle
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
@@ -32,7 +31,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,14 +41,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.demomarketapp.R
+import com.example.kampusappdemo.model.Location
 
 @Composable
 fun CardListHomeDemo(
     nameCampus: String,
     typeCampus: String,
-    ratingCampus: Float,
-    location: String,
-    image: Int,
+    ratingCampus: Double,
+    location: Location,
+    image: String,
     onClick: () -> Unit
 ) {
     Card(
@@ -64,11 +63,11 @@ fun CardListHomeDemo(
     ) {
         Column(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
             Box {
-                Image(
+                AsyncImage(
                     modifier = Modifier
                         .widthIn(max = 300.dp)
                         .aspectRatio(16f / 9f),
-                    painter = painterResource(id = image),
+                    model = image,
                     contentDescription = "",
                     contentScale = ContentScale.Crop
                 )
@@ -84,29 +83,29 @@ fun CardListHomeDemo(
                     )
                 }
             }
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = nameCampus,
-                fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.bodyLarge,
-            )
-
+            Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = typeCampus,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+                Spacer(modifier = Modifier.padding(2.dp))
+                Text(
+                    text = nameCampus,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            }
             Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(imageVector = Icons.Default.Star, contentDescription = "")
                 Text(text = ratingCampus.toString())
                 Text(
                     modifier = Modifier.padding(start = 8.dp),
-                    text = typeCampus,
+                    text = "${location.city}, ${location.province}",
                     fontWeight = FontWeight.SemiBold,
                     style = MaterialTheme.typography.bodyLarge,
                 )
             }
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = location,
-                fontWeight = FontWeight.Normal,
-                style = MaterialTheme.typography.bodyMedium,
-            )
         }
     }
 }
@@ -115,9 +114,9 @@ fun CardListHomeDemo(
 fun CardLastSeenHomeDemo(
     nameCampus: String,
     typeCampus: String,
-    ratingCampus: Float,
-    location: String,
-    image: Int,
+    ratingCampus: Double,
+    location: Location,
+    image: String,
     onClick: () -> Unit
 ) {
     Card(
@@ -131,11 +130,11 @@ fun CardLastSeenHomeDemo(
     ) {
         Column(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
             Box {
-                Image(
+                AsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(max = 200.dp),
-                    painter = painterResource(id = image),
+                    model = image,
                     contentDescription = "",
                     contentScale = ContentScale.Crop
                 )
@@ -151,29 +150,29 @@ fun CardLastSeenHomeDemo(
                     )
                 }
             }
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = nameCampus,
-                fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.bodyLarge,
-            )
-
+            Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = typeCampus,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+                Spacer(modifier = Modifier.padding(2.dp))
+                Text(
+                    text = nameCampus,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            }
             Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(imageVector = Icons.Default.Star, contentDescription = "")
                 Text(text = ratingCampus.toString())
                 Text(
                     modifier = Modifier.padding(start = 8.dp),
-                    text = typeCampus,
+                    text = "${location.city}, ${location.province}",
                     fontWeight = FontWeight.SemiBold,
                     style = MaterialTheme.typography.bodyLarge,
                 )
             }
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = location,
-                fontWeight = FontWeight.Normal,
-                style = MaterialTheme.typography.bodyMedium,
-            )
         }
     }
 }
@@ -382,9 +381,9 @@ fun CardProfileDemo() {
 fun CardListBookmarkDemo(
     nameCampus: String,
     typeCampus: String,
-    ratingCampus: String,
-    image: Int,
-    location: String,
+    ratingCampus: Double,
+    image: String,
+    location: Location,
     onClick: () -> Unit
 ) {
     Card(
@@ -398,12 +397,12 @@ fun CardListBookmarkDemo(
     ) {
         Column(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
             Box {
-                Image(
+                AsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
                         .defaultMinSize(minWidth = 56.dp, minHeight = 56.dp)
                         .heightIn(max = 200.dp),
-                    painter = painterResource(id = image),
+                    model = image,
                     contentDescription = "",
                     contentScale = ContentScale.Crop
                 )
@@ -437,11 +436,11 @@ fun CardListBookmarkDemo(
                 )
                 Row(modifier = Modifier.padding(8.dp)) {
                     Icon(imageVector = Icons.Default.Star, contentDescription = "")
-                    Text(text = ratingCampus)
+                    Text(text = ratingCampus.toString())
                 }
                 Text(
                     modifier = Modifier.padding(8.dp),
-                    text = location,
+                    text = "${location.city}, ${location.province}",
                     fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.bodyMedium,
                 )

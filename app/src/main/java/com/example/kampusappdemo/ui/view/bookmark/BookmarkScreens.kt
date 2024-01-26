@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.example.kampusappdemo.data.local.database.University
 import com.example.kampusappdemo.ui.component.CardListBookmarkDemo
 import com.example.kampusappdemo.ui.component.CardListSearchDemo
@@ -16,8 +17,10 @@ import com.example.kampusappdemo.ui.component.TopAppBarSavedDemo
 fun BookmarkScreens(
     modifier: Modifier,
     viewModel: BookmarkViewModel,
-    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: Int?, desc: String?) -> Unit,
+    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?) -> Unit,
 ) {
+    val context = LocalContext.current
+    val list = viewModel.dataList(context)
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -28,21 +31,21 @@ fun BookmarkScreens(
             modifier = Modifier.padding(it),
             columns = GridCells.Fixed(2)
         ) {
-            items(University.values()) { university ->
+            items(list) { educationData ->
                 CardListBookmarkDemo(
-                    nameCampus = university.universityName,
-                    typeCampus = university.universityType,
-                    ratingCampus = university.universityRating.toString(),
-                    image = university.universityImage,
-                    location = university.universityLocation,
+                    nameCampus = educationData.name,
+                    typeCampus = educationData.instance,
+                    ratingCampus = educationData.rating,
+                    location = educationData.location,
+                    image = educationData.image,
                     onClick = {
                         navigate(
-                            university.universityName,
-                            university.universityType,
-                            university.universityRating,
-                            university.universityLocation,
-                            university.universityImage,
-                            university.universityDescription,
+                            educationData.name,
+                            educationData.instance,
+                            educationData.rating.toFloat(),
+                            educationData.location.city,
+                            educationData.image,
+                            educationData.description.toString(),
                         )
                     },
                 )
