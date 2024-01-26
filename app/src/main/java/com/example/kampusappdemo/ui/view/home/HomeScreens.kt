@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.kampusappdemo.data.kotpref.LastSeenPreferences
 import com.example.kampusappdemo.data.local.database.University
 import com.example.kampusappdemo.ui.component.CardLastSeenHomeDemo
 import com.example.kampusappdemo.ui.component.CardListHomeDemo
@@ -30,7 +31,7 @@ import com.example.kampusappdemo.ui.component.TopAppBarHomeDemo
 @Composable
 fun HomeScreens(
     viewModel: HomeViewModel,
-    navigate: (name: String?, type: String?, rating : Float?, city: String?, image: String?, desc: String?) -> Unit,
+    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?) -> Unit,
     actionTopBar: () -> Unit
 ) {
     val context = LocalContext.current
@@ -54,24 +55,23 @@ fun HomeScreens(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = "Last seen with you"
             )
-            listLastSeen.forEach {educationData->
+            listLastSeen.forEach { educationData ->
                 CardLastSeenHomeDemo(
                     nameCampus = educationData.name,
                     typeCampus = educationData.instance,
                     ratingCampus = educationData.rating,
                     location = educationData.location,
-                    image = educationData.image,
-                    onClick = {
-                        navigate(
-                            educationData.name,
-                            educationData.instance,
-                            educationData.rating.toFloat(),
-                            educationData.location.city,
-                            educationData.image,
-                            educationData.description.toString(),
-                        )
-                    }
-                )
+                    image = educationData.image
+                ) {
+                    navigate(
+                        educationData.name,
+                        educationData.instance,
+                        educationData.rating.toFloat(),
+                        educationData.location.city,
+                        educationData.image,
+                        educationData.description.toString(),
+                    )
+                }
             }
 
             Row(

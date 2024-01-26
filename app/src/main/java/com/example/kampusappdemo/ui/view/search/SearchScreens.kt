@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -40,6 +41,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.kampusappdemo.data.kotpref.LastSeenPreferences
 import com.example.kampusappdemo.data.local.database.University
 import com.example.kampusappdemo.model.EducationData
 import com.example.kampusappdemo.ui.component.AssistChipSearchDemo
@@ -56,24 +58,22 @@ fun SearchScreens(
     navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?) -> Unit,
     viewModel: SearchViewModel
 ) {
-//    var textSearchBar by rememberSaveable { mutableStateOf("") }
-//    var searchBar by rememberSaveable { mutableStateOf(false) }
-
     val context = LocalContext.current
+
     val list = viewModel.dataList(context)
-    val searchText by viewModel.searchText.collectAsState()
+
     val isSearching by viewModel.isSearching.collectAsState()
 
     var text by rememberSaveable { mutableStateOf("") }
 
-    // Gunakan rememberCoroutineScope untuk membuat CoroutineScope
     val scope = rememberCoroutineScope()
 
+    // Create state variabel for save data
     val data = remember { mutableStateOf(listOf<EducationData>()) }
-    // Buat variabel state untuk menyimpan data
+
     val filteredData = remember { mutableStateOf(listOf<EducationData>()) }
 
-    // Gunakan LaunchedEffect untuk memuat data saat Composable pertama kali dipanggil
+    // Launcheffect for calling data at first composable build
     LaunchedEffect(Unit) {
         scope.launch {
             data.value = viewModel.dataList(context)
@@ -95,7 +95,7 @@ fun SearchScreens(
                 onQueryChange = {
                     text = it
                 },//viewModel::onSearchTextChange, //update the value of searchText
-                onSearch = viewModel::onSearchTextChange, //the callback to be invoked when the input service triggers the ImeAction.Search action
+                onSearch = { viewModel.onToogleSearch() }, //the callback to be invoked when the input service triggers the ImeAction.Search action
                 active = isSearching, //whether the user is searching or not
                 onActiveChange = { viewModel.onToogleSearch() }, //the callback to be invoked when this search bar's active state is changed
                 placeholder = { Text(text = "Search ") },
@@ -128,31 +128,52 @@ fun SearchScreens(
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    if (text.isEmpty()) {
-                        items(list) { educationData ->
-                            val resultText = educationData.name
-                            ListItem(
-                                modifier = Modifier.clickable {
-                                    text = resultText
-                                    viewModel.onToogleSearch()
-                                },
-                                overlineContent = { Text(text = educationData.instance) },
-                                headlineContent = { Text(text = resultText) },
-                                supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
-                            )
+                    when {
+                        text.isEmpty() -> {
+                            itemsIndexed(list) { index, educationData ->
+                                LastSeenPreferences.apply {
+                                    this.index = index
+                                    instance = educationData.instance
+                                    name = educationData.name
+                                    image = educationData.image
+                                    rating = educationData.rating.toFloat()
+                                    city = educationData.location.city
+                                    province = educationData.location.province
+                                }
+                                val resultText = educationData.name
+                                ListItem(
+                                    modifier = Modifier.clickable {
+                                        text = resultText
+                                        viewModel.onToogleSearch()
+                                    },
+                                    overlineContent = { Text(text = educationData.instance) },
+                                    headlineContent = { Text(text = resultText) },
+                                    supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
+                                )
+                            }
                         }
-                    } else {
-                        items(filteredData.value) { educationData ->
-                            val resultText = educationData.name
-                            ListItem(
-                                modifier = Modifier.clickable {
-                                    text = resultText
-                                    viewModel.onToogleSearch()
-                                },
-                                overlineContent = { Text(text = educationData.instance) },
-                                headlineContent = { Text(text = resultText) },
-                                supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
-                            )
+                        else -> {
+                            itemsIndexed(filteredData.value) { index, educationData ->
+                                LastSeenPreferences.apply {
+                                    this.index = index
+                                    instance = educationData.instance
+                                    name = educationData.name
+                                    image = educationData.image
+                                    rating = educationData.rating.toFloat()
+                                    city = educationData.location.city
+                                    province = educationData.location.province
+                                }
+                                val resultText = educationData.name
+                                ListItem(
+                                    modifier = Modifier.clickable {
+                                        text = resultText
+                                        viewModel.onToogleSearch()
+                                    },
+                                    overlineContent = { Text(text = educationData.instance) },
+                                    headlineContent = { Text(text = resultText) },
+                                    supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
+                                )
+                            }
                         }
                     }
                 }

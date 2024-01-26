@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kampusappdemo.data.local.database.University
@@ -23,25 +24,13 @@ import java.io.IOException
 class SearchViewModel() : ViewModel() {
 
     //first state whether the search is happening or not
-    private val _isSearching = MutableStateFlow(false)
-    val isSearching = _isSearching.asStateFlow()
-
-    //second state the text typed by the user
-    private val _searchText = MutableStateFlow("")
-    val searchText = _searchText.asStateFlow()
-
-    fun onSearchTextChange(text: String) {
-        _searchText.value = text
-    }
+    val isSearching = MutableStateFlow(false)
 
     fun onToogleSearch() {
-        _isSearching.value = !_isSearching.value
-        if (!_isSearching.value) {
-            onSearchTextChange("")
-        }
+        isSearching.value = !isSearching.value
     }
 
-    fun getJsonDataFromAsset(context: Context, fileName: String): String? {//for get local json
+    private fun getJsonDataFromAsset(context: Context, fileName: String): String? {//for get local json
         val jsonString: String
         try {
             jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
