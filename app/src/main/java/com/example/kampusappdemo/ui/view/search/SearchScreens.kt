@@ -1,7 +1,5 @@
 package com.example.kampusappdemo.ui.view.search
 
-import android.app.Application
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,20 +11,16 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Tune
-import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material3.Divider
 import androidx.compose.material3.DockedSearchBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,12 +36,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.kampusappdemo.data.kotpref.LastSeenPreferences
-import com.example.kampusappdemo.data.local.database.University
 import com.example.kampusappdemo.model.EducationData
 import com.example.kampusappdemo.ui.component.AssistChipSearchDemo
-import com.example.kampusappdemo.ui.component.CardListHomeDemo
 import com.example.kampusappdemo.ui.component.CardListSearchDemo
-import com.example.kampusappdemo.ui.component.DockedSearchBarDemo
 import com.example.kampusappdemo.ui.component.FilterChipSearchDemo
 import kotlinx.coroutines.launch
 
@@ -55,7 +46,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SearchScreens(
     modifier: Modifier,
-    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?) -> Unit,
+    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?, email: String?, website: String?, terms: String?) -> Unit,
     viewModel: SearchViewModel
 ) {
     val context = LocalContext.current
@@ -64,7 +55,7 @@ fun SearchScreens(
 
     val isSearching by viewModel.isSearching.collectAsState()
 
-    var text by rememberSaveable { mutableStateOf("") }
+    var searchTextQuery by rememberSaveable { mutableStateOf("") }
 
     val scope = rememberCoroutineScope()
 
@@ -77,13 +68,13 @@ fun SearchScreens(
     LaunchedEffect(Unit) {
         scope.launch {
             data.value = viewModel.dataList(context)
-            filteredData.value = viewModel.filterDataBySearch(data.value, text)
+            filteredData.value = viewModel.filterDataBySearch(data.value, searchTextQuery)
         }
     }
 
-    LaunchedEffect(text) {
+    LaunchedEffect(searchTextQuery) {
         scope.launch {
-            filteredData.value = viewModel.filterDataBySearch(data.value, text)
+            filteredData.value = viewModel.filterDataBySearch(data.value, searchTextQuery)
         }
     }
 
@@ -91,18 +82,19 @@ fun SearchScreens(
         modifier = modifier,
         topBar = {
             DockedSearchBar(
-                query = text,//searchText,//text showed on SearchBar
+                query = searchTextQuery,
                 onQueryChange = {
-                    text = it
-                },//viewModel::onSearchTextChange, //update the value of searchText
-                onSearch = { viewModel.onToogleSearch() }, //the callback to be invoked when the input service triggers the ImeAction.Search action
-                active = isSearching, //whether the user is searching or not
-                onActiveChange = { viewModel.onToogleSearch() }, //the callback to be invoked when this search bar's active state is changed
+                    searchTextQuery = it
+                },
+                onSearch = { viewModel.onToogleSearch() },
+                active = isSearching,
+                onActiveChange = { viewModel.onToogleSearch() },
                 placeholder = { Text(text = "Search ") },
                 trailingIcon = {
                     if (isSearching) {
                         IconButton(onClick = {
-                            if (text.isNotEmpty()) text = "" else viewModel.onToogleSearch()
+                            if (searchTextQuery.isNotEmpty()) searchTextQuery =
+                                "" else viewModel.onToogleSearch()
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Close,
@@ -129,7 +121,7 @@ fun SearchScreens(
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     when {
-                        text.isEmpty() -> {
+                        searchTextQuery.isEmpty() -> {
                             itemsIndexed(list) { index, educationData ->
                                 LastSeenPreferences.apply {
                                     this.index = index
@@ -141,17 +133,25 @@ fun SearchScreens(
                                     province = educationData.location.province
                                 }
                                 val resultText = educationData.name
+                                val blabla = educationData.studyProgram
                                 ListItem(
                                     modifier = Modifier.clickable {
-                                        text = resultText
+                                        searchTextQuery = "$resultText$blabla"
                                         viewModel.onToogleSearch()
                                     },
-                                    overlineContent = { Text(text = educationData.instance) },
+                                    overlineContent = {
+                                        if (educationData.studyProgram.isEmpty()) {
+                                            Text(text = educationData.instance)
+                                        } else {
+                                            Text(text = "${educationData.instance} | ${educationData.studyProgram}")
+                                        }
+                                    },
                                     headlineContent = { Text(text = resultText) },
                                     supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
                                 )
                             }
                         }
+
                         else -> {
                             itemsIndexed(filteredData.value) { index, educationData ->
                                 LastSeenPreferences.apply {
@@ -164,12 +164,19 @@ fun SearchScreens(
                                     province = educationData.location.province
                                 }
                                 val resultText = educationData.name
+                                val blabla = educationData.studyProgram
                                 ListItem(
                                     modifier = Modifier.clickable {
-                                        text = resultText
+                                        searchTextQuery = "$resultText $blabla"
                                         viewModel.onToogleSearch()
                                     },
-                                    overlineContent = { Text(text = educationData.instance) },
+                                    overlineContent = {
+                                        if (educationData.studyProgram.isEmpty()) {
+                                            Text(text = educationData.instance)
+                                        } else {
+                                            Text(text = "${educationData.instance} | ${educationData.studyProgram}")
+                                        }
+                                    },
                                     headlineContent = { Text(text = resultText) },
                                     supportingContent = { Text(text = "${educationData.location.city}, ${educationData.location.province}") }
                                 )
@@ -203,15 +210,17 @@ fun SearchScreens(
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2)
             ) {
-                if (text.isEmpty()) {
+                if (searchTextQuery.isEmpty()) {
                     items(list) { educationData ->
                         ListItem(headlineContent = { Text(text = educationData.name) })
                         CardListSearchDemo(
                             nameCampus = educationData.name,
+                            studyProgram = educationData.studyProgram,
                             typeCampus = educationData.instance,
                             ratingCampus = educationData.rating,
                             image = educationData.image,
-                            location = educationData.location.city,
+                            city = educationData.location.city,
+                            province = educationData.location.province,
                             onClick = {
                                 navigate(
                                     educationData.name,
@@ -220,6 +229,9 @@ fun SearchScreens(
                                     educationData.location.city,
                                     educationData.image,
                                     educationData.description.toString(),
+                                    educationData.emails,
+                                    educationData.website,
+                                    educationData.termsCondition.toString()
                                 )
                             },
                         )
@@ -229,10 +241,12 @@ fun SearchScreens(
                         ListItem(headlineContent = { Text(text = educationData.name) })
                         CardListSearchDemo(
                             nameCampus = educationData.name,
+                            studyProgram = educationData.studyProgram,
                             typeCampus = educationData.instance,
                             ratingCampus = educationData.rating,
                             image = educationData.image,
-                            location = educationData.location.city,
+                            city = educationData.location.city,
+                            province = educationData.location.province,
                             onClick = {
                                 navigate(
                                     educationData.name,
@@ -241,6 +255,9 @@ fun SearchScreens(
                                     educationData.location.city,
                                     educationData.image,
                                     educationData.description.toString(),
+                                    educationData.emails,
+                                    educationData.website,
+                                    educationData.termsCondition.toString()
                                 )
                             },
                         )

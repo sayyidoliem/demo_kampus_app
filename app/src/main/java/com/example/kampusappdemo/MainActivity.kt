@@ -108,10 +108,18 @@ class MainActivity : ComponentActivity() {
                             composable(Screens.Home.route) {
                                 HomeScreens(
                                     viewModel = HomeViewModel(),
-                                    navigate = { name, type, rating, city, image, desc ->
+                                    navigate = { name, type, rating, city, image, desc, email, website, terms ->
                                         navController.navigate(
                                             Screens.Detail.createRoute(
-                                                name, type, rating, city, image, desc
+                                                name,
+                                                type,
+                                                rating,
+                                                city,
+                                                image,
+                                                desc,
+                                                email,
+                                                website,
+                                                terms
                                             )
                                         )
                                     },
@@ -121,10 +129,18 @@ class MainActivity : ComponentActivity() {
                             composable(Screens.Search.route) {
                                 SearchScreens(
                                     modifier = Modifier.fillMaxSize(),
-                                    navigate = { name, type, rating, city, image, desc ->
+                                    navigate = { name, type, rating, city, image, desc, email, website, terms ->
                                         navController.navigate(
                                             Screens.Detail.createRoute(
-                                                name, type, rating, city, image, desc
+                                                name,
+                                                type,
+                                                rating,
+                                                city,
+                                                image,
+                                                desc,
+                                                email,
+                                                website,
+                                                terms
                                             )
                                         )
                                     },
@@ -158,6 +174,18 @@ class MainActivity : ComponentActivity() {
                                         type = NavType.StringType
                                         defaultValue = ""
                                     },
+                                    navArgument("email") {
+                                        type = NavType.StringType
+                                        defaultValue = ""
+                                    },
+                                    navArgument("website") {
+                                        type = NavType.StringType
+                                        defaultValue = ""
+                                    },
+                                    navArgument("terms") {
+                                        type = NavType.StringType
+                                        defaultValue = ""
+                                    },
                                 ),
                             ) {
                                 val name = it.arguments!!.getString("name", "")
@@ -166,6 +194,9 @@ class MainActivity : ComponentActivity() {
                                 val city = it.arguments!!.getString("city", "")
                                 val image = it.arguments!!.getString("image", "")
                                 val desc = it.arguments!!.getString("desc", "")
+                                val email = it.arguments!!.getString("email", "")
+                                val website = it.arguments!!.getString("website", "")
+                                val terms = it.arguments!!.getString("terms", "")
                                 DetailScreens(
                                     modifier = Modifier,
                                     navigateUp = { navController.navigateUp() },
@@ -176,7 +207,9 @@ class MainActivity : ComponentActivity() {
                                     nameCity = city,
                                     imageUniversity = image,
                                     nameDescription = desc,
-                                    viewmodel = DetailViewmodel()
+                                    emailUniversity = email,
+                                    websiteUniversity = website,
+                                    viewModel = DetailViewmodel()
                                 )
                             }
                             composable(Screens.Chat.route) {
@@ -234,10 +267,18 @@ class MainActivity : ComponentActivity() {
                                 BookmarkScreens(
                                     modifier = Modifier,
                                     viewModel = BookmarkViewModel(),
-                                    navigate = { name,type, rating,city, image, desc ->
+                                    navigate = { name, type, rating, city, image, desc, email, website, terms ->
                                         navController.navigate(
                                             Screens.Detail.createRoute(
-                                                name, type, rating,city, image, desc
+                                                name,
+                                                type,
+                                                rating,
+                                                city,
+                                                image,
+                                                desc,
+                                                email,
+                                                website,
+                                                terms
                                             )
                                         )
                                     },

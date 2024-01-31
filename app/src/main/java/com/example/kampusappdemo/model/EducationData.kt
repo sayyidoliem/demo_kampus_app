@@ -11,7 +11,7 @@ data class EducationData(
     val visit: Double,
     val register: Double,
     val location: Location,
-    val studyProgram: List<String>,
+    val studyProgram: String,
     val description: List<String>,
     val requirement: List<String>,
     val website: String,

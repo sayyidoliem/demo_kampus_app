@@ -17,7 +17,7 @@ import com.example.kampusappdemo.ui.component.TopAppBarSavedDemo
 fun BookmarkScreens(
     modifier: Modifier,
     viewModel: BookmarkViewModel,
-    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?) -> Unit,
+    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?, email: String?, website: String?, terms: String?) -> Unit,
 ) {
     val context = LocalContext.current
     val list = viewModel.dataList(context)
@@ -46,6 +46,9 @@ fun BookmarkScreens(
                             educationData.location.city,
                             educationData.image,
                             educationData.description.toString(),
+                            educationData.emails,
+                            educationData.website,
+                            educationData.termsCondition.toString()
                         )
                     },
                 )

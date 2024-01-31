@@ -52,7 +52,9 @@ fun DetailScreens(
     nameCity: String,
     imageUniversity: String,
     nameDescription: String,
-    viewmodel: DetailViewmodel
+    emailUniversity: String,
+    websiteUniversity: String,
+    viewModel: DetailViewmodel
 ) {
     val registerEnabled by remember {
         mutableStateOf(true)
@@ -63,7 +65,7 @@ fun DetailScreens(
             BottomAppBarDetailDemo(
                 onClickFAQ = { /*TODO*/ },
                 onClickRegister = {
-                    viewmodel.showConfirmationDialog()
+                    viewModel.showConfirmationDialog()
                 },
                 registerEnabled = registerEnabled
             )
@@ -107,7 +109,8 @@ fun DetailScreens(
                     Icon(
                         modifier = Modifier.size(24.dp),
                         imageVector = Icons.Default.Favorite,
-                        contentDescription = ""
+                        contentDescription = "",
+                        tint = MaterialTheme.colorScheme.error
                     )
                 }
             }
@@ -175,19 +178,32 @@ fun DetailScreens(
                 modifier = Modifier.padding(16.dp),
                 text = nameDescription
             )
+            Divider(thickness = 4.dp)
+            TextHeadlineDemo(
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+                text = "Contacts"
+            )
+            TextParagraphDemo(
+                modifier = Modifier.padding(16.dp),
+                text = "E-Mail : $emailUniversity"
+            )
+            TextParagraphDemo(
+                modifier = Modifier.padding(start = 16.dp),
+                text = "Website : $websiteUniversity"
+            )
         }
 
     }
     when {
-        viewmodel.openSuccessDialog.value -> {
+        viewModel.openSuccessDialog.value -> {
             SuccessDialogDemo(
                 onDismissRequest = {
-                    viewmodel.hideSuccessDialog()
-                    viewmodel.hideConfirmationDialog()
+                    viewModel.hideSuccessDialog()
+                    viewModel.hideConfirmationDialog()
                 },
                 onConfirmation = {
-                    viewmodel.hideSuccessDialog()
-                    viewmodel.hideConfirmationDialog()
+                    viewModel.hideSuccessDialog()
+                    viewModel.hideConfirmationDialog()
                     !registerEnabled
                 },
                 dialogTitle = "Succsess",
@@ -195,11 +211,11 @@ fun DetailScreens(
             )
         }
 
-        viewmodel.openConfirmation.value -> {
+        viewModel.openConfirmation.value -> {
             TermsConditionDialog(
-                openDialog = { viewmodel.hideConfirmationDialog() },
+                openDialog = { viewModel.hideConfirmationDialog() },
                 onConfirmation = {
-                    viewmodel.showSuccessDialog()
+                    viewModel.showSuccessDialog()
                 },
             )
         }

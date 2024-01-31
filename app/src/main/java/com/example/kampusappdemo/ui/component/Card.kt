@@ -47,6 +47,7 @@ import com.example.kampusappdemo.model.Location
 fun CardListHomeDemo(
     nameCampus: String,
     typeCampus: String,
+    studyProgram: String,
     ratingCampus: Double,
     location: Location,
     image: String,
@@ -92,6 +93,14 @@ fun CardListHomeDemo(
                 Spacer(modifier = Modifier.padding(2.dp))
                 Text(
                     text = nameCampus,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            }
+            if (studyProgram.isNotEmpty()) {
+                Text(
+                    modifier = Modifier.padding(start = 8.dp),
+                    text = "Program $studyProgram",
                     fontWeight = FontWeight.SemiBold,
                     style = MaterialTheme.typography.bodyLarge,
                 )
@@ -180,10 +189,12 @@ fun CardLastSeenHomeDemo(
 @Composable
 fun CardListSearchDemo(
     nameCampus: String,
+    studyProgram: String,
     typeCampus: String,
     ratingCampus: Double,
     image: String,
-    location: String,
+    city: String,
+    province: String,
     onClick: () -> Unit
 ) {
     Card(
@@ -223,14 +234,24 @@ fun CardListSearchDemo(
                 modifier = Modifier
                     .fillMaxWidth(),
             ) {
+                if (studyProgram.isEmpty()) {
+                    Text(
+                        modifier = Modifier.padding(8.dp),
+                        text = nameCampus,
+                        fontWeight = FontWeight.SemiBold,
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                } else {
+                    Text(
+                        modifier = Modifier.padding(8.dp),
+                        text = "$nameCampus | $studyProgram",
+                        fontWeight = FontWeight.SemiBold,
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
+
                 Text(
-                    modifier = Modifier.padding(8.dp),
-                    text = nameCampus,
-                    fontWeight = FontWeight.SemiBold,
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-                Text(
-                    modifier = Modifier.padding(8.dp),
+                    modifier = Modifier.padding(start = 8.dp),
                     text = typeCampus,
                     fontWeight = FontWeight.SemiBold,
                     style = MaterialTheme.typography.bodyLarge,
@@ -241,7 +262,7 @@ fun CardListSearchDemo(
                 }
                 Text(
                     modifier = Modifier.padding(8.dp),
-                    text = location,
+                    text = "$city, $province",
                     fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.bodyMedium,
                 )

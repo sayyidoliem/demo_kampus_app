@@ -14,9 +14,7 @@
       "city": "Tangerang",
       "province": "Banten"
     },
-    "studyProgram": [
-      null
-    ],
+    "studyProgram": "",
     "description": [
       "Kelas Bilingual"
     ],
@@ -45,9 +43,7 @@
       "city": "Sleman",
       "province": "DI Yogyakarta"
     },
-    "studyProgram": [
-      null
-    ],
+    "studyProgram": "",
     "description": [
       "Berbasis Agama Islam"
     ],
@@ -76,9 +72,7 @@
       "city": "Jakarta Timur",
       "province": "DKI Jakarta"
     },
-    "studyProgram": [
-      null
-    ],
+    "studyProgram": "",
     "description": [
       "Kelas Bilingual",
       "Bakat & Minat Ekstrakurikuler 12 Bidang"
@@ -108,9 +102,7 @@
       "city": "Semarang",
       "province": "Jawa Tengah"
     },
-    "studyProgram": [
-      null
-    ],
+    "studyProgram": "",
     "description": [
       "Peringkat 3 Nasional",
       "Juara Nasional Matematika 2023"
@@ -141,9 +133,7 @@
       "city": "Bogor",
       "province": "Jawa Barat"
     },
-    "studyProgram": [
-      null
-    ],
+    "studyProgram": "",
     "description": [
       "Berbasis Agama Kristen",
       "Bakat & Minat Ekstrakurikuler 6 Bidang"
@@ -177,9 +167,7 @@
       "city": "Tangerang",
       "province": "Banten"
     },
-    "studyProgram": [
-      null
-    ],
+    "studyProgram": "",
     "description": [
       "Peringkat 8 Nasional",
       "Juara Dunia Olimpiade Sains 2023",
@@ -214,9 +202,7 @@
       "city": "Sleman",
       "province": "DI Yogyakarta"
     },
-    "studyProgram": [
-      null
-    ],
+    "studyProgram": "",
     "description": [
       "Langganan Paskibraka",
       "Pendidikan Akhlak & Disiplin"
@@ -251,10 +237,7 @@
       "city": "Jakarta Timur",
       "province": "DKI Jakarta"
     },
-    "studyProgram": [
-      "Keperawatan",
-      "Farmasi"
-    ],
+    "studyProgram": "Keperawatan",
     "description": [
       "Memiliki Jaringan Nasional RS",
       "Lulus bisa langsung kerja"
@@ -287,16 +270,7 @@
       "city": "Semarang",
       "province": "Jawa Tengah"
     },
-    "studyProgram": [
-      "Teknik Arsitektur",
-      "Teknik Informatika",
-      "Teknik Sipil",
-      "Farmasi",
-      "Ekonomi",
-      "Hukum",
-      "MIPA",
-      "Sastra"
-    ],
+    "studyProgram": "Teknik Arsitektur",
     "description": [
       "Tingkat 5 Nasional",
       "Rata-rata kelulusan 3.5 tahun",
@@ -319,6 +293,258 @@
   },
   {
     "id": 10,
+    "instance": "Universitas(S1)",
+    "name": "Patriot",
+    "rating": 4.2,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Deanna.OKeefe@example.com",
+    "teleConsultation": 99.000,
+    "visit": 198.000,
+    "register": 396.000,
+    "location": {
+      "district": "Semarang",
+      "city": "Semarang",
+      "province": "Jawa Tengah"
+    },
+    "studyProgram": "Teknik Informatika",
+    "description": [
+      "Tingkat 5 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.2",
+      "Juara Olimpiade Catur 2023"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi minimal B"
+    ],
+    "website": "https://natural-fence.com",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 3 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 11,
+    "instance": "Universitas(S1)",
+    "name": "Patriot",
+    "rating": 4.2,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Deanna.OKeefe@example.com",
+    "teleConsultation": 99.000,
+    "visit": 198.000,
+    "register": 396.000,
+    "location": {
+      "district": "Semarang",
+      "city": "Semarang",
+      "province": "Jawa Tengah"
+    },
+    "studyProgram": "Teknik Sipil",
+    "description": [
+      "Tingkat 5 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.2",
+      "Juara Olimpiade Catur 2023"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi minimal B"
+    ],
+    "website": "https://natural-fence.com",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 3 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 12,
+    "instance": "Universitas(S1)",
+    "name": "Patriot",
+    "rating": 4.2,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Deanna.OKeefe@example.com",
+    "teleConsultation": 99.000,
+    "visit": 198.000,
+    "register": 396.000,
+    "location": {
+      "district": "Semarang",
+      "city": "Semarang",
+      "province": "Jawa Tengah"
+    },
+    "studyProgram": "Farmasi",
+    "description": [
+      "Tingkat 5 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.2",
+      "Juara Olimpiade Catur 2023"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi minimal B"
+    ],
+    "website": "https://natural-fence.com",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 3 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 13,
+    "instance": "Universitas(S1)",
+    "name": "Patriot",
+    "rating": 4.2,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Deanna.OKeefe@example.com",
+    "teleConsultation": 99.000,
+    "visit": 198.000,
+    "register": 396.000,
+    "location": {
+      "district": "Semarang",
+      "city": "Semarang",
+      "province": "Jawa Tengah"
+    },
+    "studyProgram": "Ekonomi",
+    "description": [
+      "Tingkat 5 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.2",
+      "Juara Olimpiade Catur 2023"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi minimal B"
+    ],
+    "website": "https://natural-fence.com",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 3 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 14,
+    "instance": "Universitas(S1)",
+    "name": "Patriot",
+    "rating": 4.2,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Deanna.OKeefe@example.com",
+    "teleConsultation": 99.000,
+    "visit": 198.000,
+    "register": 396.000,
+    "location": {
+      "district": "Semarang",
+      "city": "Semarang",
+      "province": "Jawa Tengah"
+    },
+    "studyProgram": "Hukum",
+    "description": [
+      "Tingkat 5 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.2",
+      "Juara Olimpiade Catur 2023"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi minimal B"
+    ],
+    "website": "https://natural-fence.com",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 3 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 15,
+    "instance": "Universitas(S1)",
+    "name": "Patriot",
+    "rating": 4.2,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Deanna.OKeefe@example.com",
+    "teleConsultation": 99.000,
+    "visit": 198.000,
+    "register": 396.000,
+    "location": {
+      "district": "Semarang",
+      "city": "Semarang",
+      "province": "Jawa Tengah"
+    },
+    "studyProgram": "MIPA",
+    "description": [
+      "Tingkat 5 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.2",
+      "Juara Olimpiade Catur 2023"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi minimal B"
+    ],
+    "website": "https://natural-fence.com",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 3 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 16,
+    "instance": "Universitas(S1)",
+    "name": "Patriot",
+    "rating": 4.2,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Deanna.OKeefe@example.com",
+    "teleConsultation": 99.000,
+    "visit": 198.000,
+    "register": 396.000,
+    "location": {
+      "district": "Semarang",
+      "city": "Semarang",
+      "province": "Jawa Tengah"
+    },
+    "studyProgram": "Sastra",
+    "description": [
+      "Tingkat 5 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.2",
+      "Juara Olimpiade Catur 2023"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi minimal B"
+    ],
+    "website": "https://natural-fence.com",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 3 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 17,
     "instance": "Universitas(D3)",
     "name": "Suara Dunia",
     "rating": 4.9,
@@ -332,11 +558,7 @@
       "city": "Bogor",
       "province": "Jawa Barat"
     },
-    "studyProgram": [
-      "Bahasa Arab",
-      "Bahasa Inggris",
-      "Bahasa Mandarin"
-    ],
+    "studyProgram": "Bahasa Arab",
     "description": [
       "50% Dosen Native Speaker",
       "Memiliki Jaringan Nasional Perusahaan Asing",
@@ -356,7 +578,75 @@
     ]
   },
   {
-    "id": 11,
+    "id": 18,
+    "instance": "Universitas(D3)",
+    "name": "Suara Dunia",
+    "rating": 4.9,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Geo.Hirthe67@example.com",
+    "teleConsultation": 75.000,
+    "visit": 150.000,
+    "register": 300.000,
+    "location": {
+      "district": "Bogor",
+      "city": "Bogor",
+      "province": "Jawa Barat"
+    },
+    "studyProgram": "Bahasa Inggris",
+    "description": [
+      "50% Dosen Native Speaker",
+      "Memiliki Jaringan Nasional Perusahaan Asing",
+      "Lulus bisa langsung kerja"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya"
+    ],
+    "website": "https://spicy-safe.info/",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 1 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 19,
+    "instance": "Universitas(D3)",
+    "name": "Suara Dunia",
+    "rating": 4.9,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Geo.Hirthe67@example.com",
+    "teleConsultation": 75.000,
+    "visit": 150.000,
+    "register": 300.000,
+    "location": {
+      "district": "Bogor",
+      "city": "Bogor",
+      "province": "Jawa Barat"
+    },
+    "studyProgram": "Bahasa Mandarin",
+    "description": [
+      "50% Dosen Native Speaker",
+      "Memiliki Jaringan Nasional Perusahaan Asing",
+      "Lulus bisa langsung kerja"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya"
+    ],
+    "website": "https://spicy-safe.info/",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 1 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 20,
     "instance": "Universitas(S1)",
     "name": "Putra Bangsa",
     "rating": 5,
@@ -370,11 +660,7 @@
       "city": "Surabaya",
       "province": "Jawa Timur"
     },
-    "studyProgram": [
-      "Teknik Arsitektur",
-      "Teknik Informatika",
-      "Teknik Sipil"
-    ],
+    "studyProgram": "Teknik Arsitektur",
     "description": [
       "Tingkat 2 Nasional",
       "Rata-rata kelulusan 3.5 tahun",
@@ -389,6 +675,111 @@
     "website": "https://spicy-safe.info/",
     "termsCondition": [
       "Pengumuman Seleksi Maksimal 1 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 21,
+    "instance": "Universitas(S1)",
+    "name": "Putra Bangsa",
+    "rating": 5,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Geo.Hirthe67@example.com",
+    "teleConsultation": 150.000,
+    "visit": 300.000,
+    "register": 600.000,
+    "location": {
+      "district": "Surabaya",
+      "city": "Surabaya",
+      "province": "Jawa Timur"
+    },
+    "studyProgram": "Teknik Informatika",
+    "description": [
+      "Tingkat 2 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.4",
+      "Laboratorium Penelitian Terlengkap di Indonesia"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi A"
+    ],
+    "website": "https://spicy-safe.info/",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 1 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 22,
+    "instance": "Universitas(S1)",
+    "name": "Putra Bangsa",
+    "rating": 5,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Geo.Hirthe67@example.com",
+    "teleConsultation": 150.000,
+    "visit": 300.000,
+    "register": 600.000,
+    "location": {
+      "district": "Surabaya",
+      "city": "Surabaya",
+      "province": "Jawa Timur"
+    },
+    "studyProgram": "Teknik Sipil",
+    "description": [
+      "Tingkat 2 Nasional",
+      "Rata-rata kelulusan 3.5 tahun",
+      "Rata-rata IPK Lulus 3.4",
+      "Laboratorium Penelitian Terlengkap di Indonesia"
+    ],
+    "requirement": [
+      "Lulus tes masuk",
+      "Lulus SMA max 3 tahun sebelumnya",
+      "Berasal dari SMA Akreditasi A"
+    ],
+    "website": "https://spicy-safe.info/",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 1 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Ijazah (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
+    "id": 23,
+    "instance": "SMA",
+    "name": "Sinar Mulia",
+    "rating": 5,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Samson.Reinger19@example.com",
+    "teleConsultation": 30.000,
+    "visit": 60.000,
+    "register": 120.000,
+    "location": {
+      "district": "Jakarta Timur",
+      "city": "Jakarta Timur",
+      "province": "DKI Jakarta"
+    },
+    "studyProgram": "Farmasi",
+    "description": [
+      "Memiliki Jaringan Nasional RS",
+      "Lulus bisa langsung kerja"
+    ],
+    "requirement": [
+      "Usia maksimal 17 th",
+      "Nilai Matematika Minimal 7"
+    ],
+    "website": "https://difficult-option.info",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 3 hari setelah pendaftaran",
       "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
       "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang",
       "Wajib membawa Raport (Asli & Fotokopi) saat Daftar Ulang",

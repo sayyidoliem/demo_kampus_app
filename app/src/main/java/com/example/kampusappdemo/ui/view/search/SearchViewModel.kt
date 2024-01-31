@@ -1,24 +1,12 @@
 package com.example.kampusappdemo.ui.view.search
 
-import android.app.Application
 import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.kampusappdemo.data.local.database.University
 import com.example.kampusappdemo.model.EducationData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.IOException
 
 class SearchViewModel() : ViewModel() {
@@ -51,8 +39,10 @@ class SearchViewModel() : ViewModel() {
         return data.filter {
             it.name.contains(name, ignoreCase = true)
                     || it.instance.contains(name, ignoreCase = true)
+                    || it.studyProgram.contains(name, ignoreCase = true)
                     || it.location.city.contains(name, ignoreCase = true)
                     || it.location.province.contains(name, ignoreCase = true)
+                    || it.name.contains(name, ignoreCase = true) && it.studyProgram.contains(name, ignoreCase = true)
         }.toMutableList()
     }
 }

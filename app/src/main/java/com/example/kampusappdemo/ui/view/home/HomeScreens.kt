@@ -31,7 +31,7 @@ import com.example.kampusappdemo.ui.component.TopAppBarHomeDemo
 @Composable
 fun HomeScreens(
     viewModel: HomeViewModel,
-    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?) -> Unit,
+    navigate: (name: String?, type: String?, rating: Float?, city: String?, image: String?, desc: String?, email: String?, website: String?, terms: String?) -> Unit,
     actionTopBar: () -> Unit
 ) {
     val context = LocalContext.current
@@ -44,7 +44,6 @@ fun HomeScreens(
             )
         }
     ) {
-        val dataDummy = University.KAMPUS_1
         Column(
             modifier = Modifier
                 .padding(it)
@@ -70,6 +69,9 @@ fun HomeScreens(
                         educationData.location.city,
                         educationData.image,
                         educationData.description.toString(),
+                        educationData.emails,
+                        educationData.website,
+                        educationData.termsCondition.toString()
                     )
                 }
             }
@@ -98,6 +100,7 @@ fun HomeScreens(
                     CardListHomeDemo(
                         nameCampus = educationData.name,
                         typeCampus = educationData.instance,
+                        studyProgram = educationData.studyProgram,
                         ratingCampus = educationData.rating,
                         location = educationData.location,
                         image = educationData.image
@@ -109,6 +112,9 @@ fun HomeScreens(
                             educationData.location.city,
                             educationData.image,
                             educationData.description.toString(),
+                            educationData.emails,
+                            educationData.website,
+                            educationData.termsCondition.toString()
                         )
                     }
                 }
@@ -139,6 +145,7 @@ fun HomeScreens(
                     CardListHomeDemo(
                         nameCampus = educationData.name,
                         typeCampus = educationData.instance,
+                        studyProgram = educationData.studyProgram,
                         ratingCampus = educationData.rating,
                         location = educationData.location,
                         image = educationData.image
@@ -150,6 +157,9 @@ fun HomeScreens(
                             educationData.location.city,
                             educationData.image,
                             educationData.description.toString(),
+                            educationData.emails,
+                            educationData.website,
+                            educationData.termsCondition.toString()
                         )
                     }
                 }
