@@ -42,7 +42,6 @@ import androidx.compose.ui.unit.dp
 fun BottomAppBarDemo(
     icon: ImageVector
 ) {
-
     BottomAppBar(
         modifier = Modifier.fillMaxWidth(),
         containerColor = Color(0xFFF0E7BC),
@@ -71,110 +70,4 @@ fun BottomAppBarDemo(
             }
         }
     )
-}
-
-@Composable
-fun BottomAppBarDetailDemo(
-    onClickFAQ: () -> Unit,
-    onClickRegister: () -> Unit,
-    registerEnabled : Boolean
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        OutlinedButton(
-            modifier = Modifier.weight(0.5F),
-            onClick = { onClickFAQ() }) {
-            Text(text = "FAQ")
-        }
-        Spacer(modifier = Modifier.padding(8.dp))
-        Button(
-            enabled = registerEnabled,
-            modifier = Modifier.weight(0.5F),
-            onClick = {
-                onClickRegister()
-            }) {
-            Text(text = "Register Now")
-        }
-    }
-}
-
-@Composable
-fun BottomAppBarPaymentDemo() {
-    BottomAppBar {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(text = "Total Price : 2003k")
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Order")
-            }
-        }
-    }
-}
-
-@Composable
-fun BottomAppBarProfileDemo(
-    onClick: () -> Unit
-) {
-    Button(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-        onClick = { onClick() }) {
-        Text(text = "Edit Profile")
-    }
-}
-
-@Composable
-fun BottomAppBarSettingDemo(
-    version: String
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Kampus Demo App")
-        Text(text = "Version $version")
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun BottomAppBarChatDemo() {
-    var searchBar by rememberSaveable { mutableStateOf(false) }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-    ) {
-        ChatInputDemo(
-            modifier = Modifier.weight(0.8F),
-            p = "Let's Chat",
-            i = searchBar,
-            isShowSearchBar = { !searchBar })
-        Spacer(modifier = Modifier.padding(4.dp))
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary,
-            ),
-            shape = CircleShape
-        ) {
-            IconButton(
-                modifier = Modifier.padding(5.dp),
-                onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Default.Send, contentDescription = "")
-            }
-        }
-    }
 }

@@ -1,5 +1,34 @@
 [
   {
+    "id": 0,
+    "instance": "TK",
+    "name": "Anak Awokwok",
+    "rating": 4.8,
+    "image": "https://dummyjson.com/image/150",
+    "emails": "Rowland.Wilderman93@example.com",
+    "teleConsultation": 25.000,
+    "visit": 50.000,
+    "register": 100.000,
+    "location": {
+      "district": "Tangerang",
+      "city": "Tangerang",
+      "province": "Banten"
+    },
+    "studyProgram": "Umum",
+    "description": [
+      "Kelas Bilingual"
+    ],
+    "requirement": [
+      "Usia minimal 4 th"
+    ],
+    "website": "https://torn-tattler.biz",
+    "termsCondition": [
+      "Pengumuman Seleksi Maksimal 7 hari setelah pendaftaran",
+      "Wajib membawa Akte Kelahiran (Asli & Fotokopi) saat Daftar Ulang",
+      "Wajib membawa Kartu Keluarga (Asli & Fotokopi) saat Daftar Ulang"
+    ]
+  },
+  {
     "id": 1,
     "instance": "TK",
     "name": "Anak Aktif",

@@ -13,10 +13,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -26,22 +24,22 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.kampusappdemo.navigation.BottomNavigationDemo
 import com.example.kampusappdemo.navigation.Screens
-import com.example.kampusappdemo.ui.view.detail.DetailScreens
-import com.example.kampusappdemo.ui.view.home.HomeScreens
-import com.example.kampusappdemo.ui.view.profile.ProfileScreens
-import com.example.kampusappdemo.ui.view.search.SearchScreens
-import com.example.kampusappdemo.ui.view.setting.SettingsScreens
+import com.example.kampusappdemo.feature.detail.view.DetailScreens
+import com.example.kampusappdemo.feature.home.view.HomeScreens
+import com.example.kampusappdemo.feature.profile.view.ProfileScreens
+import com.example.kampusappdemo.feature.search.view.SearchScreens
+import com.example.kampusappdemo.feature.setting.view.SettingsScreens
 import com.example.kampusappdemo.ui.theme.DemoMarketAppTheme
-import com.example.kampusappdemo.ui.view.booking.BookingScreens
-import com.example.kampusappdemo.ui.view.bookmark.BookmarkScreens
-import com.example.kampusappdemo.ui.view.bookmark.BookmarkViewModel
-import com.example.kampusappdemo.ui.view.chat.ChatScreens
-import com.example.kampusappdemo.ui.view.detail.DetailViewmodel
-import com.example.kampusappdemo.ui.view.home.HomeViewModel
-import com.example.kampusappdemo.ui.view.payment.PaymentViewModel
-import com.example.kampusappdemo.ui.view.profile.ProfileViewModel
-import com.example.kampusappdemo.ui.view.search.SearchViewModel
-import com.example.kampusappdemo.ui.view.setting.SettingsViewmodel
+import com.example.kampusappdemo.feature.booking.view.BookingScreens
+import com.example.kampusappdemo.feature.bookmark.view.BookmarkScreens
+import com.example.kampusappdemo.feature.bookmark.viewmodel.BookmarkViewModel
+import com.example.kampusappdemo.feature.chat.view.ChatScreens
+import com.example.kampusappdemo.feature.detail.viewmodel.DetailViewmodel
+import com.example.kampusappdemo.feature.home.viewmodel.HomeViewModel
+import com.example.kampusappdemo.feature.payment.viewmodel.PaymentViewModel
+import com.example.kampusappdemo.feature.profile.viewmodel.ProfileViewModel
+import com.example.kampusappdemo.feature.search.viewmodel.SearchViewModel
+import com.example.kampusappdemo.feature.setting.viewmodel.SettingsViewmodel
 import com.example.kampusappdemo.utils.GlobalState
 
 class MainActivity : ComponentActivity() {
@@ -103,23 +101,15 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             modifier = Modifier.padding(it),
                             navController = navController,
-                            startDestination = Screens.Home.route
+                            startDestination = Screens.Search.route
                         ) {
                             composable(Screens.Home.route) {
                                 HomeScreens(
                                     viewModel = HomeViewModel(),
-                                    navigate = { name, type, rating, city, image, desc, email, website, terms ->
+                                    navigate = { index ->
                                         navController.navigate(
                                             Screens.Detail.createRoute(
-                                                name,
-                                                type,
-                                                rating,
-                                                city,
-                                                image,
-                                                desc,
-                                                email,
-                                                website,
-                                                terms
+                                                index = index,
                                             )
                                         )
                                     },
@@ -129,18 +119,10 @@ class MainActivity : ComponentActivity() {
                             composable(Screens.Search.route) {
                                 SearchScreens(
                                     modifier = Modifier.fillMaxSize(),
-                                    navigate = { name, type, rating, city, image, desc, email, website, terms ->
+                                    navigate = { index->
                                         navController.navigate(
                                             Screens.Detail.createRoute(
-                                                name,
-                                                type,
-                                                rating,
-                                                city,
-                                                image,
-                                                desc,
-                                                email,
-                                                website,
-                                                terms
+                                                index,
                                             )
                                         )
                                     },
@@ -150,65 +132,18 @@ class MainActivity : ComponentActivity() {
                             composable(
                                 Screens.Detail.route,
                                 arguments = listOf(
-                                    navArgument("name") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("type") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("rating") {
-                                        type = NavType.FloatType
-                                        defaultValue = 0.0
-                                    },
-                                    navArgument("city") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("image") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("desc") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("email") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("website") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("terms") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
+                                    navArgument("index"){
+                                      type = NavType.IntType
+                                      defaultValue = 1
                                     },
                                 ),
                             ) {
-                                val name = it.arguments!!.getString("name", "")
-                                val type = it.arguments!!.getString("type", "")
-                                val rating = it.arguments!!.getFloat("rating", 0.0F)
-                                val city = it.arguments!!.getString("city", "")
-                                val image = it.arguments!!.getString("image", "")
-                                val desc = it.arguments!!.getString("desc", "")
-                                val email = it.arguments!!.getString("email", "")
-                                val website = it.arguments!!.getString("website", "")
-                                val terms = it.arguments!!.getString("terms", "")
+                                val index = it.arguments!!.getInt("index",1)
                                 DetailScreens(
                                     modifier = Modifier,
                                     navigateUp = { navController.navigateUp() },
                                     navigate = { navController.navigate(Screens.Chat.route) },
-                                    nameUniversity = name,
-                                    typeUniversity = type,
-                                    ratingUniversity = rating,
-                                    nameCity = city,
-                                    imageUniversity = image,
-                                    nameDescription = desc,
-                                    emailUniversity = email,
-                                    websiteUniversity = website,
+                                    index = index,
                                     viewModel = DetailViewmodel()
                                 )
                             }
@@ -267,18 +202,10 @@ class MainActivity : ComponentActivity() {
                                 BookmarkScreens(
                                     modifier = Modifier,
                                     viewModel = BookmarkViewModel(),
-                                    navigate = { name, type, rating, city, image, desc, email, website, terms ->
+                                    navigate = { index ->
                                         navController.navigate(
                                             Screens.Detail.createRoute(
-                                                name,
-                                                type,
-                                                rating,
-                                                city,
-                                                image,
-                                                desc,
-                                                email,
-                                                website,
-                                                terms
+                                                index = index,
                                             )
                                         )
                                     },
@@ -303,11 +230,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-
-@Composable
-fun currentRoute(navController: NavController): String? {
-    val navBackStackEntry = navController.currentBackStackEntry
-    return navBackStackEntry?.destination?.route
 }
