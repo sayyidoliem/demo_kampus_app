@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Kampus Demo App"
+rootProject.name = "SCOLA = A Privilege"
 include(":app")

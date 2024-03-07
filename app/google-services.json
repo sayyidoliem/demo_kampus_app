@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "424333586216",
+    "project_id": "kampusdemodata",
+    "storage_bucket": "kampusdemodata.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424333586216:android:159761e44247c82618ea1d",
+        "android_client_info": {
+          "package_name": "com.example.demomarketapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_HdtH_l_mL8LUGIH58Im4glrwdpZEoU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@ package com.example.kampusappdemo.model
 
 data class EducationData(
     val id: Int,
+    val idImage: Int,
     val instance: String,
     val name: String,
     val rating: Double,

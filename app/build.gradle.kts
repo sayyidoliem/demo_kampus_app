@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -63,6 +64,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.6")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -103,4 +105,11 @@ dependencies {
 
     // optional, support saving enum value and ordinal
     implementation ("com.chibatching.kotpref:enum-support:2.13.1")
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth-ktx")
 }
