@@ -1,4 +1,4 @@
-package com.example.kampusappdemo.module.user.feature.login.component
+package com.example.kampusappdemo.module.guest.feature.login.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

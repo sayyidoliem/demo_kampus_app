@@ -1,4 +1,4 @@
-package com.example.kampusappdemo.module.user.feature.login.view
+package com.example.kampusappdemo.module.guest.feature.login.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -48,8 +48,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.kampusappdemo.module.user.feature.login.component.TopBarLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.viewmodel.LoginViewModel
+import com.example.kampusappdemo.module.guest.feature.login.component.TopBarLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
 import com.example.kampusappdemo.ui.component.TextHeadlineDemo
 
 @Composable

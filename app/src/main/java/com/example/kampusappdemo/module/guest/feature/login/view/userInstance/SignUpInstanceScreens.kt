@@ -1,4 +1,4 @@
-package com.example.kampusappdemo.module.user.feature.login.view.userInstance
+package com.example.kampusappdemo.module.guest.feature.login.view.userInstance
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,18 +22,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.demomarketapp.R
-import com.example.kampusappdemo.module.user.feature.login.component.BottomBarSignUpLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.component.ButtonRegisterLogin
-import com.example.kampusappdemo.module.user.feature.login.component.ButtonWithAccountLogin
-import com.example.kampusappdemo.module.user.feature.login.component.InsertImageDialogLogin
-import com.example.kampusappdemo.module.user.feature.login.component.InsertStudyProgramDialogLogin
-import com.example.kampusappdemo.module.user.feature.login.component.StudyProgramRadioButtonDemo
-import com.example.kampusappdemo.module.user.feature.login.component.TextFieldInsertImage
-import com.example.kampusappdemo.module.user.feature.login.component.TextFieldLocationLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.component.TextFieldLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.component.TextFieldPasswordLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.component.TopBarLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.viewmodel.LoginViewModel
+import com.example.kampusappdemo.module.guest.feature.login.component.BottomBarSignUpLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.ButtonRegisterLogin
+import com.example.kampusappdemo.module.guest.feature.login.component.ButtonWithAccountLogin
+import com.example.kampusappdemo.module.guest.feature.login.component.InsertImageDialogLogin
+import com.example.kampusappdemo.module.guest.feature.login.component.InsertStudyProgramDialogLogin
+import com.example.kampusappdemo.module.guest.feature.login.component.StudyProgramRadioButtonDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldInsertImage
+import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldLocationLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldPasswordLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.TopBarLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
 import com.example.kampusappdemo.ui.component.TextTitleDemo
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.kampusappdemo.module.user.feature.login.component
+package com.example.kampusappdemo.module.guest.feature.login.component
 
 import android.util.Patterns
 import androidx.compose.foundation.Image
@@ -37,7 +37,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.demomarketapp.R
-import com.example.kampusappdemo.module.user.feature.login.viewmodel.LoginViewModel
+import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
 import com.example.kampusappdemo.ui.component.TextSubHeadlineDemo
 
 @OptIn(ExperimentalComposeUiApi::class)

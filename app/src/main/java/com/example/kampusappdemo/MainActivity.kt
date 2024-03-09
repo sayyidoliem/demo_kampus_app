@@ -36,11 +36,11 @@ import com.example.kampusappdemo.module.user.feature.detail.view.DetailScreens
 import com.example.kampusappdemo.module.user.feature.detail.viewmodel.DetailViewmodel
 import com.example.kampusappdemo.module.user.feature.home.view.HomeScreens
 import com.example.kampusappdemo.module.user.feature.home.viewmodel.HomeViewModel
-import com.example.kampusappdemo.module.user.feature.login.view.ChangeTypeUserLogin
-import com.example.kampusappdemo.module.user.feature.login.view.SignIn
-import com.example.kampusappdemo.module.user.feature.login.view.userInstance.SignUpInstanceScreens
-import com.example.kampusappdemo.module.user.feature.login.view.userStudent.SignUpStudentScreens
-import com.example.kampusappdemo.module.user.feature.login.viewmodel.LoginViewModel
+import com.example.kampusappdemo.module.guest.feature.login.view.ChangeTypeUserLogin
+import com.example.kampusappdemo.module.guest.feature.login.view.SignIn
+import com.example.kampusappdemo.module.guest.feature.login.view.userInstance.SignUpInstanceScreens
+import com.example.kampusappdemo.module.guest.feature.login.view.userStudent.SignUpStudentScreens
+import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
 import com.example.kampusappdemo.module.user.feature.payment.viewmodel.PaymentViewModel
 import com.example.kampusappdemo.module.user.feature.profile.view.ProfileScreens
 import com.example.kampusappdemo.module.user.feature.profile.viewmodel.ProfileViewModel

@@ -1,4 +1,4 @@
-package com.example.kampusappdemo.module.user.feature.login.view.userStudent
+package com.example.kampusappdemo.module.guest.feature.login.view.userStudent
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -27,12 +27,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.demomarketapp.R
-import com.example.kampusappdemo.module.user.feature.login.component.BottomBarSignUpLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.component.ButtonWithAccountLogin
-import com.example.kampusappdemo.module.user.feature.login.component.TextFieldLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.component.TextFieldPasswordLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.component.TopBarLoginDemo
-import com.example.kampusappdemo.module.user.feature.login.viewmodel.LoginViewModel
+import com.example.kampusappdemo.module.guest.feature.login.component.BottomBarSignUpLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.ButtonWithAccountLogin
+import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldPasswordLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.TopBarLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
 import com.example.kampusappdemo.ui.component.TextTitleDemo
 
 @Composable

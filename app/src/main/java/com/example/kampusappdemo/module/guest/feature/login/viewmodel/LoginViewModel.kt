@@ -1,4 +1,4 @@
-package com.example.kampusappdemo.module.user.feature.login.viewmodel
+package com.example.kampusappdemo.module.guest.feature.login.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

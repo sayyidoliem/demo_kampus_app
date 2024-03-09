@@ -1,4 +1,4 @@
-package com.example.kampusappdemo.module.user.feature.login.component
+package com.example.kampusappdemo.module.guest.feature.login.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.kampusappdemo.module.user.feature.login.viewmodel.LoginViewModel
+import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
 
 @Composable
 fun ButtonWithAccountLogin(label: String, icon: Int? = null) {
