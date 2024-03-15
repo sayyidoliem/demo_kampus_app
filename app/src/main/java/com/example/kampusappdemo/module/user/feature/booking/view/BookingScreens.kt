@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.ImageDummy
 import com.example.kampusappdemo.data.local.database.University
 import com.example.kampusappdemo.model.EducationData
@@ -27,6 +28,9 @@ fun BookingScreens(
 ) {
     val context = LocalContext.current
     val list = viewModel.dataList(context)
+
+    SettingPreferences.typeUser = SettingPreferences.USER
+
     Scaffold(
         topBar = {
             TopAppBarBookingDemo()
