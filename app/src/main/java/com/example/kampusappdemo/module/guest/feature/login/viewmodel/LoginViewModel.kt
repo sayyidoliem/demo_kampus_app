@@ -10,7 +10,6 @@ class LoginViewModel : ViewModel() {
     val list = listOf("Student", "Instance/College")
 
     val studyProgramOptions = listOf("General", "Specific")
-
     var user by mutableStateOf("")
         private set
 

@@ -23,4 +23,9 @@ object SettingPreferences : KotprefModel() {
 
     var isOnBoarding by booleanPref(true)
 
+    var typeUser by intPref(0)
+
+    const val GUEST = 0
+    const val USER = 1
+    const val ADMIN = 2
 }

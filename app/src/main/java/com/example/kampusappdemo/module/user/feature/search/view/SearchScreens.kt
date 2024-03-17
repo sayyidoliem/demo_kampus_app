@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.kampusappdemo.data.kotpref.LastSeenPreferences
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.ImageDummy
 import com.example.kampusappdemo.model.EducationData
 import com.example.kampusappdemo.module.user.feature.search.component.AssistChipSearchDemo
@@ -54,6 +55,8 @@ fun SearchScreens(
     navigate: (index: Int?) -> Unit,
     viewModel: SearchViewModel
 ) {
+    SettingPreferences.typeUser = SettingPreferences.USER
+
     val context = LocalContext.current
 
     val list = viewModel.dataList(context)
@@ -204,17 +207,17 @@ fun SearchScreens(
                 item {
                     AssistChipSearchDemo(
                         label = "Filter",
-                        modifier = Modifier.padding(8.dp),
+                        modifier = Modifier.padding(horizontal = 8.dp),
                         icon = Icons.Default.Tune,
                         onClick = { viewModel.onToogleFilter() }
                     )
                 }
                 items(1) {
                     FilterChipSearchDemo(
-                        modifier = Modifier.padding(8.dp),
+                        modifier = Modifier.padding(horizontal = 8.dp),
                         label = "Rating Tertinggi"
                     )
-                    FilterChipSearchDemo(modifier = Modifier.padding(8.dp), label = "Umum")
+                    FilterChipSearchDemo(modifier = Modifier.padding(horizontal = 8.dp), label = "Umum")
                 }
             }
             LazyVerticalGrid(

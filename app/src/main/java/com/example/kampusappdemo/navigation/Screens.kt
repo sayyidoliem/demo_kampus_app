@@ -16,6 +16,14 @@ sealed class Screens(val route: String) {
     }
 
     object Booking : Screens("booking")
+    object Dashboard : Screens("dashboard")
+    object DetailDashboard : Screens("detailDashboard?&index={index}"){
+        fun createRoute(
+            index : Int?,
+        ): String{
+            return "detailDashboard?&index=${index}"
+        }
+    }
     object Payment : Screens("payment?&index={index}") {
         fun createRoute(
             index: Int?,
@@ -23,8 +31,8 @@ sealed class Screens(val route: String) {
             return "payment?&index=${index}"
         }
     }
-
     object Bookmark : Screens("bookmark")
+    object Statistic : Screens("statistic")
     object Profile :
         Screens("profile?&name={name}&phone={phone}&email={email}&nameInstance={nameInstance}&studyProgram={studyProgram}&city={city}&province={province}") {
         fun createRoute(
@@ -42,4 +50,6 @@ sealed class Screens(val route: String) {
 
     object Setting : Screens("setting")
     object Chat : Screens("chat")
+    object ChatAdmin : Screens("chatAdmin")
+    object ListChat : Screens("listChat")
 }

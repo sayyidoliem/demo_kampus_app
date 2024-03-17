@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.ImageDummy
 import com.example.kampusappdemo.module.user.feature.home.component.CardLastSeenHomeDemo
 import com.example.kampusappdemo.module.user.feature.home.component.CardListHomeDemo
@@ -35,8 +36,13 @@ fun HomeScreens(
     actionTopBar: () -> Unit
 ) {
     val context = LocalContext.current
+
     val list = viewModel.dataList(context)
+
     val listLastSeen = viewModel.filterDataByLastSeen(context)
+
+    SettingPreferences.typeUser = SettingPreferences.USER
+
     Scaffold(
         topBar = {
             TopAppBarHomeDemo(

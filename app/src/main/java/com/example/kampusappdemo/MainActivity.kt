@@ -4,7 +4,6 @@ import PaymentScreens
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -16,7 +15,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -24,6 +22,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
+import com.example.kampusappdemo.module.admin.feature.chat.view.ChatAdminScreens
+import com.example.kampusappdemo.module.admin.feature.chat.view.ListChatAdminScreens
+import com.example.kampusappdemo.module.admin.feature.dashboard.view.DashboardScreens
+import com.example.kampusappdemo.module.admin.feature.dashboard.view.DetailDashboardScreens
+import com.example.kampusappdemo.module.admin.feature.dashboard.viewmodel.DashboardViewModel
+import com.example.kampusappdemo.module.admin.feature.statistic.view.StatisticAdminScreens
 import com.example.kampusappdemo.navigation.BottomNavigationDemo
 import com.example.kampusappdemo.navigation.Screens
 import com.example.kampusappdemo.ui.theme.DemoMarketAppTheme
@@ -74,41 +79,109 @@ class MainActivity : ComponentActivity() {
                                 Screens.Detail.route -> null
                                 Screens.Setting.route -> null
                                 Screens.Chat.route -> null
+                                Screens.ChatAdmin.route -> null
                                 Screens.Payment.route -> null
+                                Screens.DetailDashboard.route -> null
                                 Screens.SignIn.route -> null
                                 Screens.TypeUserSignUp.route -> null
                                 Screens.SignUpStudent.route -> null
                                 Screens.SignUpInstance.route -> null
                                 else -> NavigationBar(containerColor = MaterialTheme.colorScheme.primaryContainer) {
                                     //getting the list of bottom navigation items for our data class
-                                    BottomNavigationDemo().BottomNavItemDemo()
-                                        .forEachIndexed { index, navigationItem ->
-                                            //iterating all items with their respective indexes
-                                            NavigationBarItem(
-                                                selected = navigationItem.route == currentDestination?.route,
-                                                label = { Text(navigationItem.label) },
-                                                icon = {
-                                                    Icon(
-                                                        navigationItem.icon,
-                                                        contentDescription = navigationItem.label,
-                                                        tint = if (navigationItem.route == currentDestination?.route) {
-                                                            MaterialTheme.colorScheme.onSurfaceVariant
-                                                        } else {
-                                                            MaterialTheme.colorScheme.onPrimaryContainer
+                                    when (SettingPreferences.typeUser) {
+                                        SettingPreferences.GUEST -> {
+                                            BottomNavigationDemo().bottomNavItemUserDemo()
+                                                .forEachIndexed { index, navigationItem ->
+                                                    //iterating all items with their respective indexes
+                                                    NavigationBarItem(
+                                                        selected = navigationItem.route == currentDestination?.route,
+                                                        label = { Text(navigationItem.label) },
+                                                        icon = {
+                                                            Icon(
+                                                                navigationItem.icon,
+                                                                contentDescription = navigationItem.label,
+                                                                tint = if (navigationItem.route == currentDestination?.route) {
+                                                                    MaterialTheme.colorScheme.onSurfaceVariant
+                                                                } else {
+                                                                    MaterialTheme.colorScheme.onPrimaryContainer
+                                                                }
+                                                            )
+                                                        },
+                                                        onClick = {
+                                                            navController.navigate(navigationItem.route) {
+                                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                                    saveState = true
+                                                                }
+                                                                launchSingleTop = true
+                                                                restoreState = true
+                                                            }
                                                         }
                                                     )
-                                                },
-                                                onClick = {
-                                                    navController.navigate(navigationItem.route) {
-                                                        popUpTo(navController.graph.findStartDestination().id) {
-                                                            saveState = true
-                                                        }
-                                                        launchSingleTop = true
-                                                        restoreState = true
-                                                    }
                                                 }
-                                            )
                                         }
+
+                                        SettingPreferences.USER -> {
+                                            BottomNavigationDemo().bottomNavItemUserDemo()
+                                                .forEachIndexed { index, navigationItem ->
+                                                    //iterating all items with their respective indexes
+                                                    NavigationBarItem(
+                                                        selected = navigationItem.route == currentDestination?.route,
+                                                        label = { Text(navigationItem.label) },
+                                                        icon = {
+                                                            Icon(
+                                                                navigationItem.icon,
+                                                                contentDescription = navigationItem.label,
+                                                                tint = if (navigationItem.route == currentDestination?.route) {
+                                                                    MaterialTheme.colorScheme.onSurfaceVariant
+                                                                } else {
+                                                                    MaterialTheme.colorScheme.onPrimaryContainer
+                                                                }
+                                                            )
+                                                        },
+                                                        onClick = {
+                                                            navController.navigate(navigationItem.route) {
+                                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                                    saveState = true
+                                                                }
+                                                                launchSingleTop = true
+                                                                restoreState = true
+                                                            }
+                                                        }
+                                                    )
+                                                }
+                                        }
+
+                                        SettingPreferences.ADMIN -> {
+                                            BottomNavigationDemo().bottomNavItemAdminDemo()
+                                                .forEachIndexed { index, navigationItem ->
+                                                    //iterating all items with their respective indexes
+                                                    NavigationBarItem(
+                                                        selected = navigationItem.route == currentDestination?.route,
+                                                        label = { Text(navigationItem.label) },
+                                                        icon = {
+                                                            Icon(
+                                                                navigationItem.icon,
+                                                                contentDescription = navigationItem.label,
+                                                                tint = if (navigationItem.route == currentDestination?.route) {
+                                                                    MaterialTheme.colorScheme.onSurfaceVariant
+                                                                } else {
+                                                                    MaterialTheme.colorScheme.onPrimaryContainer
+                                                                }
+                                                            )
+                                                        },
+                                                        onClick = {
+                                                            navController.navigate(navigationItem.route) {
+                                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                                    saveState = true
+                                                                }
+                                                                launchSingleTop = true
+                                                                restoreState = true
+                                                            }
+                                                        }
+                                                    )
+                                                }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -116,7 +189,7 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             modifier = Modifier.padding(it),
                             navController = navController,
-                            startDestination = Screens.SignIn.route
+                            startDestination = Screens.Dashboard.route
                         ) {
                             composable(Screens.SignIn.route) {
                                 SignIn(
@@ -219,8 +292,18 @@ class MainActivity : ComponentActivity() {
                                     viewModel = DetailViewmodel()
                                 )
                             }
+                            composable(Screens.ListChat.route) {
+                                ListChatAdminScreens(navigate = {
+                                    navController.navigate(Screens.ChatAdmin.route)
+                                })
+                            }
                             composable(Screens.Chat.route) {
                                 ChatScreens(
+                                    navigateUp = { navController.navigateUp() }
+                                )
+                            }
+                            composable(Screens.ChatAdmin.route) {
+                                ChatAdminScreens(
                                     navigateUp = { navController.navigateUp() }
                                 )
                             }
@@ -234,6 +317,34 @@ class MainActivity : ComponentActivity() {
                                         )
                                     },
                                     viewModel = BookingViewModel()
+                                )
+                            }
+                            composable(Screens.Dashboard.route) {
+                                DashboardScreens(
+                                    navigate = { index ->
+                                        navController.navigate(
+                                            Screens.DetailDashboard.createRoute(
+                                                index = index
+                                            )
+                                        )
+                                    },
+                                    viewModel = DashboardViewModel()
+                                )
+                            }
+                            composable(
+                                Screens.DetailDashboard.route,
+                                arguments = listOf(
+                                    navArgument("index") {
+                                        type = NavType.IntType
+                                        defaultValue = 0
+                                    },
+                                ),
+                            ) {
+                                val index = it.arguments!!.getInt("index", 0)
+                                DetailDashboardScreens(
+                                    index = index,
+                                    navigateUp = { navController.navigateUp() },
+                                    viewModel = DashboardViewModel()
                                 )
                             }
                             composable(
@@ -265,6 +376,9 @@ class MainActivity : ComponentActivity() {
                                         )
                                     },
                                 )
+                            }
+                            composable(Screens.Statistic.route) {
+                                StatisticAdminScreens()
                             }
                             composable(Screens.Profile.route,
                                 arguments = listOf(

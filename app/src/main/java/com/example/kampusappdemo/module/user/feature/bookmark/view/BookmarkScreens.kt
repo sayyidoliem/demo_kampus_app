@@ -8,6 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.ImageDummy
 import com.example.kampusappdemo.module.user.feature.bookmark.component.CardListBookmarkDemo
 import com.example.kampusappdemo.module.user.feature.bookmark.component.TopAppBarSavedDemo
@@ -21,6 +22,9 @@ fun BookmarkScreens(
 ) {
     val context = LocalContext.current
     val list = viewModel.dataList(context)
+
+    SettingPreferences.typeUser = SettingPreferences.USER
+
     Scaffold(
         modifier = modifier,
         topBar = {

@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.demomarketapp.R
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.module.guest.feature.login.component.BottomBarSignUpLoginDemo
 import com.example.kampusappdemo.module.guest.feature.login.component.ButtonRegisterLogin
 import com.example.kampusappdemo.module.guest.feature.login.component.ButtonWithAccountLogin
@@ -123,18 +124,21 @@ fun SignUpInstanceScreens(
                 keyboardType = null,
             )
 
-            ButtonRegisterLogin(onClick = {
-                navigate(
-                     viewModel.user,
-                     viewModel.phone,
-                     viewModel.email,
-                     viewModel.instance,
-                     viewModel.instance,
-                     viewModel.city,
-                    viewModel.province
-                )
-            },
-                viewModel = viewModel)
+            ButtonRegisterLogin(
+                onClick = {
+                    navigate(
+                        viewModel.user,
+                        viewModel.phone,
+                        viewModel.email,
+                        viewModel.instance,
+                        viewModel.instance,
+                        viewModel.city,
+                        viewModel.province
+                    )
+                    SettingPreferences.typeUser = SettingPreferences.ADMIN
+                },
+                viewModel = viewModel
+            )
             Row(
                 modifier = Modifier.padding(16.dp),
                 horizontalArrangement = Arrangement.SpaceAround,

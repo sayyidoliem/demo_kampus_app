@@ -31,3 +31,9 @@ fun TopAppBarChatAdminDemo(
         }
     )
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBarListChatAdminDemo(){
+    CenterAlignedTopAppBar(title = { Text(text = "Chat") })
+}

@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.demomarketapp.R
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.module.guest.feature.login.component.BottomBarSignUpLoginDemo
 import com.example.kampusappdemo.module.guest.feature.login.component.ButtonWithAccountLogin
 import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldLoginDemo
@@ -99,7 +100,10 @@ fun SignUpStudentScreens(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .padding(top = 16.dp),
-                onClick = { navigateRegister(viewModel.user, viewModel.phone, viewModel.email) },
+                onClick = {
+                    navigateRegister(viewModel.user, viewModel.phone, viewModel.email)
+                    SettingPreferences.typeUser = SettingPreferences.USER
+                },
                 enabled = viewModel.isSignUpStudentConfirmed()
             ) {
                 Text(text = "Register")

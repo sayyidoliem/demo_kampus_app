@@ -1,16 +1,25 @@
 package com.example.kampusappdemo.module.user.feature.profile.view
 
+import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachFile
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,27 +72,42 @@ fun ProfileScreens(
             )
         }
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.Center
+
         ) {
-            Image(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .clip(CircleShape)
-                    .align(Alignment.CenterHorizontally),
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "",
-                contentScale = ContentScale.Crop
+            Spacer(modifier = Modifier.padding(24.dp))
+            ListItem(
+                leadingContent = {
+                    Image(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .clip(CircleShape)
+                            .size(72.dp),
+                        painter = painterResource(id = R.drawable.ic_launcher_background),
+                        contentDescription = "",
+                    )
+                },
+                headlineContent = { Text(text = "User") },
+                supportingContent = {
+                    Spacer(modifier = Modifier.padding(vertical = 4.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(imageVector = Icons.Default.Email, contentDescription = "")
+                        Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+                        Text(text = viewModel.email)
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(imageVector = Icons.Default.Phone, contentDescription = "")
+                        Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+                        Text(text = viewModel.phone)
+                    }
+                },
+                shadowElevation = 16.dp
             )
-            ListItemIndentitySettingDemo(
-                headLineText = "Name",
-                supportText = viewModel.name
-            )
+            Spacer(modifier = Modifier.padding(16.dp))
             if (nameInstance.isNotEmpty()) {
                 ListItemIndentitySettingDemo(
                     headLineText = "Name Instance",
@@ -102,14 +126,6 @@ fun ProfileScreens(
                     supportText = province
                 )
             }
-            ListItemIndentitySettingDemo(
-                headLineText = "Phone Number",
-                supportText = viewModel.phone
-            )
-            ListItemIndentitySettingDemo(
-                headLineText = "E - Mail",
-                supportText = viewModel.email
-            )
             ListItemDocumentSettingDemo(
                 headLineText = "Diploma Document",
                 supportText = viewModel.document,
