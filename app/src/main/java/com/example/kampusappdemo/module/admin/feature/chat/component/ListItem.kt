@@ -31,5 +31,4 @@ fun ListItemChatAdminDemo(navigate : () -> Unit){
         trailingContent = { Text(text = "10.10") },
         tonalElevation = 2.dp
     )
-
 }

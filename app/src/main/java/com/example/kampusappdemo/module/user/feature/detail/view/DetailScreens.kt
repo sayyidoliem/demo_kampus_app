@@ -43,14 +43,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.ImageDummy
 import com.example.kampusappdemo.module.user.feature.detail.component.BottomAppBarDetailDemo
 import com.example.kampusappdemo.module.user.feature.detail.component.FABChat
 import com.example.kampusappdemo.module.user.feature.detail.component.FAQDialog
 import com.example.kampusappdemo.module.user.feature.detail.component.FilterChipDetailDemo
+import com.example.kampusappdemo.module.user.feature.detail.component.SignInDetailDialog
 import com.example.kampusappdemo.module.user.feature.detail.component.SuccessDialogDemo
 import com.example.kampusappdemo.module.user.feature.detail.component.TermsConditionDialog
 import com.example.kampusappdemo.module.user.feature.detail.viewmodel.DetailViewmodel
+import com.example.kampusappdemo.module.user.feature.home.component.SignInHomeDialog
 import com.example.kampusappdemo.ui.component.TextHeadlineDemo
 import com.example.kampusappdemo.ui.component.TextParagraphDemo
 import com.example.kampusappdemo.ui.component.TextTitleDemo
@@ -59,6 +62,7 @@ import com.example.kampusappdemo.ui.component.TextTitleDemo
 @Composable
 fun DetailScreens(
     modifier: Modifier,
+    navigateToSignIn: () -> Unit,
     navigateUp: () -> Unit,
     navigate: () -> Unit,
     index: Int,
@@ -75,15 +79,31 @@ fun DetailScreens(
         modifier = modifier,
         bottomBar = {
             BottomAppBarDetailDemo(
-                onClickFAQ = { viewModel.showFAQDialog() },
+                onClickFAQ = {
+                    if (SettingPreferences.typeUser == SettingPreferences.GUEST) {
+                        viewModel.showDialog()
+                    } else {
+                        viewModel.showFAQDialog()
+                    }
+                },
                 onClickRegister = {
-                    viewModel.showConfirmationDialog()
+                    if (SettingPreferences.typeUser == SettingPreferences.GUEST) {
+                        viewModel.showDialog()
+                    } else {
+                        viewModel.showConfirmationDialog()
+                    }
                 },
                 registerEnabled = registerEnabled
             )
         },
         floatingActionButton = {
-            FABChat(navigate = { navigate() })
+            FABChat(navigate = {
+                if (SettingPreferences.typeUser == SettingPreferences.GUEST) {
+                    viewModel.showDialog()
+                } else {
+                    navigate()
+                }
+            })
         }
     ) {
         Column(
@@ -248,6 +268,10 @@ fun DetailScreens(
                 onTeleconsultationClick = {},
                 onVisitClick = {}
             )
+        }
+
+        viewModel.openSignInDialog.value -> {
+            SignInDetailDialog(navigate = { navigateToSignIn() }, viewModel = viewModel)
         }
     }
 }

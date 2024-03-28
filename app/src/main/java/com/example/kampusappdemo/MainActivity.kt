@@ -36,7 +36,7 @@ import com.example.kampusappdemo.module.user.feature.booking.view.BookingScreens
 import com.example.kampusappdemo.module.user.feature.booking.viewmodel.BookingViewModel
 import com.example.kampusappdemo.module.user.feature.bookmark.view.BookmarkScreens
 import com.example.kampusappdemo.module.user.feature.bookmark.viewmodel.BookmarkViewModel
-import com.example.kampusappdemo.module.user.feature.chat.view.ChatScreens
+import com.example.kampusappdemo.module.user.feature.chat.view.ChatUserScreens
 import com.example.kampusappdemo.module.user.feature.detail.view.DetailScreens
 import com.example.kampusappdemo.module.user.feature.detail.viewmodel.DetailViewmodel
 import com.example.kampusappdemo.module.user.feature.home.view.HomeScreens
@@ -46,13 +46,16 @@ import com.example.kampusappdemo.module.guest.feature.login.view.SignIn
 import com.example.kampusappdemo.module.guest.feature.login.view.userInstance.SignUpInstanceScreens
 import com.example.kampusappdemo.module.guest.feature.login.view.userStudent.SignUpStudentScreens
 import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
+import com.example.kampusappdemo.module.guest.feature.needlogin.view.NeedLoginScreens
 import com.example.kampusappdemo.module.user.feature.payment.viewmodel.PaymentViewModel
-import com.example.kampusappdemo.module.user.feature.profile.view.ProfileScreens
-import com.example.kampusappdemo.module.user.feature.profile.viewmodel.ProfileViewModel
+import com.example.kampusappdemo.module.guest.feature.profile.view.ProfileScreens
+import com.example.kampusappdemo.module.guest.feature.profile.viewmodel.ProfileViewModel
 import com.example.kampusappdemo.module.user.feature.search.view.SearchScreens
 import com.example.kampusappdemo.module.user.feature.search.viewmodel.SearchViewModel
-import com.example.kampusappdemo.module.user.feature.setting.view.SettingsScreens
-import com.example.kampusappdemo.module.user.feature.setting.viewmodel.SettingsViewmodel
+import com.example.kampusappdemo.module.guest.feature.setting.view.SettingsScreens
+import com.example.kampusappdemo.module.guest.feature.setting.viewmodel.SettingsViewmodel
+import com.example.kampusappdemo.module.guest.feature.splash.view.SplashScreens
+import com.example.kampusappdemo.module.user.feature.chat.view.ListChatUserScreens
 import com.example.kampusappdemo.utils.GlobalState
 
 class MainActivity : ComponentActivity() {
@@ -78,7 +81,8 @@ class MainActivity : ComponentActivity() {
                             when (currentRoute) {
                                 Screens.Detail.route -> null
                                 Screens.Setting.route -> null
-                                Screens.Chat.route -> null
+                                Screens.ChatUser.route -> null
+                                Screens.ListChatUser.route -> null
                                 Screens.ChatAdmin.route -> null
                                 Screens.Payment.route -> null
                                 Screens.DetailDashboard.route -> null
@@ -86,11 +90,12 @@ class MainActivity : ComponentActivity() {
                                 Screens.TypeUserSignUp.route -> null
                                 Screens.SignUpStudent.route -> null
                                 Screens.SignUpInstance.route -> null
-                                else -> NavigationBar(containerColor = MaterialTheme.colorScheme.primaryContainer) {
+                                Screens.Splash.route -> null
+                                else -> NavigationBar(containerColor = MaterialTheme.colorScheme.inversePrimary) {
                                     //getting the list of bottom navigation items for our data class
                                     when (SettingPreferences.typeUser) {
                                         SettingPreferences.GUEST -> {
-                                            BottomNavigationDemo().bottomNavItemUserDemo()
+                                            BottomNavigationDemo().bottomNavItemGuestDemo()
                                                 .forEachIndexed { index, navigationItem ->
                                                     //iterating all items with their respective indexes
                                                     NavigationBarItem(
@@ -180,6 +185,7 @@ class MainActivity : ComponentActivity() {
                                                         }
                                                     )
                                                 }
+
                                         }
                                     }
                                 }
@@ -189,8 +195,17 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             modifier = Modifier.padding(it),
                             navController = navController,
-                            startDestination = Screens.Dashboard.route
+                            startDestination = // Screens.ListChatAdmin.route
+                            when {
+                                SettingPreferences.isOnBoarding && GlobalState.isOnBoarding -> Screens.Splash.route
+                                SettingPreferences.typeUser == SettingPreferences.USER -> Screens.Home.route
+                                SettingPreferences.typeUser == SettingPreferences.ADMIN -> Screens.Dashboard.route
+                                else -> Screens.SignIn.route
+                            }
                         ) {
+                            composable(Screens.Splash.route) {
+                                SplashScreens(navigate = { navController.navigate(Screens.SignIn.route) })
+                            }
                             composable(Screens.SignIn.route) {
                                 SignIn(
                                     navigateUp = { navController.navigateUp() },
@@ -211,19 +226,7 @@ class MainActivity : ComponentActivity() {
                                 SignUpStudentScreens(
                                     navigateUp = { navController.navigateUp() },
                                     navigateSignIn = { navController.navigate(Screens.SignIn.route) },
-                                    navigateRegister = { name, phone, email ->
-                                        navController.navigate(
-                                            Screens.Profile.createRoute(
-                                                name = name,
-                                                phone = phone,
-                                                email = email,
-                                                nameInstance = "",
-                                                studyProgram = "",
-                                                city = "",
-                                                province = ""
-                                            )
-                                        )
-                                    },
+                                    navigate = { navController.navigate(Screens.Home.route) },
                                     viewModel = LoginViewModel()
                                 )
                             }
@@ -231,18 +234,8 @@ class MainActivity : ComponentActivity() {
                                 SignUpInstanceScreens(
                                     navigateUp = { navController.navigateUp() },
                                     navigateSignIn = { navController.navigate(Screens.SignIn.route) },
-                                    navigate = { name, phone, email, nameInstance, studyProgram, city, province ->
-                                        navController.navigate(
-                                            Screens.Profile.createRoute(
-                                                name = name,
-                                                phone = phone,
-                                                email = email,
-                                                nameInstance = nameInstance,
-                                                studyProgram = studyProgram,
-                                                city = city,
-                                                province = province
-                                            )
-                                        )
+                                    navigate = {
+                                        navController.navigate(Screens.Dashboard.route)
                                     },
                                     viewModel = LoginViewModel()
                                 )
@@ -257,7 +250,8 @@ class MainActivity : ComponentActivity() {
                                             )
                                         )
                                     },
-                                    actionTopBar = { navController.navigate(Screens.Chat.route) }
+                                    navigateToSignIn = { navController.navigate(Screens.SignIn.route) },
+                                    actionTopBar = { navController.navigate(Screens.ListChatUser.route) }
                                 )
                             }
                             composable(Screens.Search.route) {
@@ -286,19 +280,21 @@ class MainActivity : ComponentActivity() {
                                 val index = it.arguments!!.getInt("index", 0)
                                 DetailScreens(
                                     modifier = Modifier,
+                                    navigateToSignIn = { navController.navigate(Screens.SignIn.route) },
                                     navigateUp = { navController.navigateUp() },
-                                    navigate = { navController.navigate(Screens.Chat.route) },
+                                    navigate = { navController.navigate(Screens.ChatUser.route) },
                                     index = index,
                                     viewModel = DetailViewmodel()
                                 )
                             }
-                            composable(Screens.ListChat.route) {
-                                ListChatAdminScreens(navigate = {
-                                    navController.navigate(Screens.ChatAdmin.route)
-                                })
+                            composable(Screens.ChatUser.route) {
+                                ChatUserScreens(
+                                    navigateUp = { navController.navigateUp() }
+                                )
                             }
-                            composable(Screens.Chat.route) {
-                                ChatScreens(
+                            composable(Screens.ListChatUser.route) {
+                                ListChatUserScreens(
+                                    navigate = { navController.navigate(Screens.ChatUser.route) },
                                     navigateUp = { navController.navigateUp() }
                                 )
                             }
@@ -307,13 +303,22 @@ class MainActivity : ComponentActivity() {
                                     navigateUp = { navController.navigateUp() }
                                 )
                             }
+                            composable(Screens.ListChatAdmin.route) {
+                                ListChatAdminScreens(navigate = {
+                                    navController.navigate(Screens.ChatAdmin.route)
+                                })
+                            }
                             composable(Screens.Booking.route) {
                                 BookingScreens(
                                     navigate = { index ->
                                         navController.navigate(
-                                            Screens.Payment.createRoute(
-                                                index
-                                            )
+                                            if (SettingPreferences.typeUser == SettingPreferences.GUEST) {
+                                                Screens.NeedSignIn.route
+                                            } else {
+                                                Screens.Payment.createRoute(
+                                                    index
+                                                )
+                                            }
                                         )
                                     },
                                     viewModel = BookingViewModel()
@@ -380,56 +385,12 @@ class MainActivity : ComponentActivity() {
                             composable(Screens.Statistic.route) {
                                 StatisticAdminScreens()
                             }
-                            composable(Screens.Profile.route,
-                                arguments = listOf(
-                                    navArgument("name") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("phone") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("email") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("nameInstance") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("studyProgram") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("city") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    },
-                                    navArgument("province") {
-                                        type = NavType.StringType
-                                        defaultValue = ""
-                                    }
-                                )
-                            ) {
-                                val name = it.arguments!!.getString("name", "")
-                                val phone = it.arguments!!.getString("phone", "")
-                                val email = it.arguments!!.getString("email", "")
-                                val nameInstance = it.arguments!!.getString("nameInstance", "")
-                                val studyProgram = it.arguments!!.getString("studyProgram", "")
-                                val city = it.arguments!!.getString("city", "")
-                                val province = it.arguments!!.getString("province", "")
+                            composable(Screens.Profile.route) {
                                 ProfileScreens(
                                     modifier = Modifier,
                                     viewModel = ProfileViewModel(),
-                                    name = name,
-                                    phone = phone,
-                                    email = email,
-                                    nameInstance = nameInstance,
-                                    studyProgram = studyProgram,
-                                    city = city,
-                                    province = province,
-                                    navigate = { navController.navigate(Screens.Setting.route) },
+                                    navigate = { navController.navigate(Screens.SignIn.route) },
+                                    navigateToSetting = { navController.navigate(Screens.Setting.route) }
                                 )
                             }
                             composable(Screens.Setting.route) {
@@ -438,6 +399,11 @@ class MainActivity : ComponentActivity() {
                                     navigate = { navController.navigateUp() },
                                     viewmodel = SettingsViewmodel()
                                 )
+                            }
+                            composable(Screens.NeedSignIn.route) {
+                                NeedLoginScreens(
+                                    navigateUp = { navController.navigateUp() },
+                                    navigateToSigIn = { navController.navigate(Screens.SignIn.route) })
                             }
                         }
                     }

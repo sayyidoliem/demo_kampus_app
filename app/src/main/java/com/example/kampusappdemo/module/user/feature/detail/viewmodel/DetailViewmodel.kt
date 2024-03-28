@@ -73,6 +73,14 @@ class DetailViewmodel : ViewModel() {
         searchBar.value = false
     }
 
+
+    var openSignInDialog = mutableStateOf(false)
+    fun showDialog() {
+        openSignInDialog.value = true
+    }
+    fun hideDialog() {
+        openSignInDialog.value = false
+    }
     private fun getJsonDataFromAsset(context: Context): String? {//for get local json
         val jsonString: String
         try {

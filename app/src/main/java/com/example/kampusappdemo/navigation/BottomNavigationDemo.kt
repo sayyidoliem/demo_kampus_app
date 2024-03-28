@@ -16,6 +16,15 @@ data class BottomNavigationDemo(
     val icon: ImageVector  = Icons.Default.Home,
     val label: String = ""
 ) {
+    fun bottomNavItemGuestDemo(): List<BottomNavigationDemo> {
+        return listOf(
+            BottomNavigationDemo(Screens.Home.route, Icons.Default.Home, "Home"),
+            BottomNavigationDemo(Screens.Search.route, Icons.Default.Explore, "Explore"),
+            BottomNavigationDemo(Screens.NeedSignIn.route, Icons.Default.Reorder, "Booking"),
+            BottomNavigationDemo(Screens.NeedSignIn.route, Icons.Default.Bookmarks, "Saved"),
+            BottomNavigationDemo(Screens.NeedSignIn.route, Icons.Default.AccountCircle, "Profile")
+        )
+    }
     fun bottomNavItemUserDemo(): List<BottomNavigationDemo> {
         return listOf(
             BottomNavigationDemo(Screens.Home.route, Icons.Default.Home, "Home"),
@@ -24,16 +33,14 @@ data class BottomNavigationDemo(
             BottomNavigationDemo(Screens.Bookmark.route, Icons.Default.Bookmarks, "Saved"),
             BottomNavigationDemo(Screens.Profile.route, Icons.Default.AccountCircle, "Profile")
         )
-
     }
 
     fun bottomNavItemAdminDemo(): List<BottomNavigationDemo> {
         return listOf(
             BottomNavigationDemo(Screens.Dashboard.route, Icons.Default.Dashboard, "Dashboard"),
-            BottomNavigationDemo(Screens.ListChat.route, Icons.Default.Chat, "Chat"),
+            BottomNavigationDemo(Screens.ListChatAdmin.route, Icons.Default.Chat, "Chat"),
             BottomNavigationDemo(Screens.Statistic.route, Icons.Default.BarChart, "Statistic"),
             BottomNavigationDemo(Screens.Profile.route, Icons.Default.AccountCircle, "Profile")
         )
-
     }
 }

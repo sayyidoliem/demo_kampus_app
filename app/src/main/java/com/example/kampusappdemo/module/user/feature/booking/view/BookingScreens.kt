@@ -29,8 +29,6 @@ fun BookingScreens(
     val context = LocalContext.current
     val list = viewModel.dataList(context)
 
-    SettingPreferences.typeUser = SettingPreferences.USER
-
     Scaffold(
         topBar = {
             TopAppBarBookingDemo()

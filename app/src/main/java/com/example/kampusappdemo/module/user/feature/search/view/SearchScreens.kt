@@ -55,7 +55,6 @@ fun SearchScreens(
     navigate: (index: Int?) -> Unit,
     viewModel: SearchViewModel
 ) {
-    SettingPreferences.typeUser = SettingPreferences.USER
 
     val context = LocalContext.current
 

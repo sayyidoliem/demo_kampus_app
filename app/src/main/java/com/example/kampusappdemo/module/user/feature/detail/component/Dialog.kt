@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -37,6 +38,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.University
+import com.example.kampusappdemo.module.user.feature.detail.viewmodel.DetailViewmodel
+import com.example.kampusappdemo.module.user.feature.home.viewmodel.HomeViewModel
 import com.example.kampusappdemo.ui.component.TextHeadlineDemo
 import com.example.kampusappdemo.ui.component.TextParagraphDemo
 
@@ -281,4 +284,30 @@ fun FAQDialog(
             }
         }
     }
+}
+
+@Composable
+fun SignInDetailDialog(navigate : () -> Unit, viewModel: DetailViewmodel){
+    AlertDialog(
+        icon = {
+            Icon(imageVector = Icons.Default.Warning, contentDescription = "")
+        },
+        title = {
+            Text(text = "Need Sign In")
+        },
+        text = {
+            Text(text = "Please sign in to use the other feature from SCOLA : A Privilege")
+        },
+        onDismissRequest = { viewModel.hideDialog() },
+        confirmButton = {
+            Button(onClick = { navigate()}) {
+                Text(text = "Sign In")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = { viewModel.hideDialog() }) {
+                Text(text = "Dissmiss")
+            }
+        }
+    )
 }

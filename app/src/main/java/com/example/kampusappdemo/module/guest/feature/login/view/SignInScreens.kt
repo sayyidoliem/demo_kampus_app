@@ -8,30 +8,37 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import com.example.kampusappdemo.data.datastore.UserData
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.demomarketapp.R
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.module.guest.feature.login.component.BottomBarSignInLoginDemo
 import com.example.kampusappdemo.module.guest.feature.login.component.ButtonWithAccountLogin
 import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldLoginDemo
 import com.example.kampusappdemo.module.guest.feature.login.component.TextFieldPasswordLoginDemo
 import com.example.kampusappdemo.module.guest.feature.login.component.TopBarLoginDemo
+import com.example.kampusappdemo.module.guest.feature.login.component.TopBarSignInLoginDemo
 import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
 import com.example.kampusappdemo.ui.component.TextSubHeadlineDemo
 import com.example.kampusappdemo.ui.component.TextTitleDemo
+import kotlinx.coroutines.launch
 
 @Composable
 fun SignIn(
@@ -40,9 +47,15 @@ fun SignIn(
     navigateHome: () -> Unit,
     viewModel: LoginViewModel
 ) {
+    val context = LocalContext.current
+
+    val dataStore = UserData(context)
+
+    val scope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
-            TopBarLoginDemo(navigate = { navigateUp() })
+            TopBarSignInLoginDemo(navigate = { navigateUp() })
         },
         bottomBar = {
             BottomBarSignInLoginDemo(openDialog = { navigateSignUp() })
@@ -76,6 +89,7 @@ fun SignIn(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .padding(top = 16.dp),
+                enabled = viewModel.isSignInConfirmed(),
                 onClick = { navigateHome() }) {
                 Text(text = "Login")
             }
@@ -84,16 +98,27 @@ fun SignIn(
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Divider(modifier = Modifier.weight(0.4f))
+                HorizontalDivider(modifier = Modifier.weight(0.4f))
                 Text(modifier = Modifier.padding(horizontal = 16.dp), text = "OR")
-                Divider(modifier = Modifier.weight(0.4f))
+                HorizontalDivider(modifier = Modifier.weight(0.4f))
             }
-            ButtonWithAccountLogin(label = "Continue with Google", icon = R.drawable.icongoogle)
+            ButtonWithAccountLogin(
+                label = "Continue with Google",
+                icon = R.drawable.icongoogle,
+                onClick = {})
             Spacer(modifier = Modifier.padding(4.dp))
-            ButtonWithAccountLogin(label = "Continue with Apple", icon = R.drawable.iconapple)
+            ButtonWithAccountLogin(
+                label = "Continue with Apple",
+                icon = R.drawable.iconapple,
+                onClick = {})
             Spacer(modifier = Modifier.padding(4.dp))
-            ButtonWithAccountLogin(label = "Continue as Guest")
-
+            ButtonWithAccountLogin(label = "Continue as Guest", onClick = {
+                navigateHome()
+                SettingPreferences.typeUser = SettingPreferences.GUEST
+                scope.launch {
+                    dataStore.saveUserName("Guest")
+                }
+            })
         }
     }
 }

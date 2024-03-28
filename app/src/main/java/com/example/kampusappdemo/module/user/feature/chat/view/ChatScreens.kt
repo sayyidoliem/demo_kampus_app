@@ -6,7 +6,7 @@ import com.example.kampusappdemo.module.user.feature.chat.component.BottomAppBar
 import com.example.kampusappdemo.module.user.feature.chat.component.TopAppBarChatDemo
 
 @Composable
-fun ChatScreens(
+fun ChatUserScreens(
     navigateUp: () -> Unit
 ) {
     Scaffold(

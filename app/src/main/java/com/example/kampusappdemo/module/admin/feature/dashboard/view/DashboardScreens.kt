@@ -45,11 +45,12 @@ import androidx.compose.ui.unit.dp
 import com.example.demomarketapp.R
 import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.ImageDummy
+import com.example.kampusappdemo.module.admin.feature.chat.component.CardDashboardAdminScreens
 import com.example.kampusappdemo.module.admin.feature.dashboard.component.AddDashboardDialog
 import com.example.kampusappdemo.module.admin.feature.dashboard.component.SwitchDashboardAdminDemo
 import com.example.kampusappdemo.module.admin.feature.dashboard.viewmodel.DashboardViewModel
-import com.example.kampusappdemo.module.user.feature.profile.component.EditDocumentDialogLogin
-import com.example.kampusappdemo.module.user.feature.profile.component.EditProfileDialog
+import com.example.kampusappdemo.module.guest.feature.profile.component.EditDocumentDialogLogin
+import com.example.kampusappdemo.module.guest.feature.profile.component.EditProfileDialog
 import com.example.kampusappdemo.ui.component.TextTitleDemo
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -92,64 +93,22 @@ fun DashboardScreens(navigate: (index: Int?) -> Unit, viewModel: DashboardViewMo
             }
             item {
                 list.forEach { educationData ->
-                    ElevatedCard(modifier = Modifier.padding(16.dp),
-                        elevation = CardDefaults.cardElevation(
-                            defaultElevation = 10.dp,
-                            pressedElevation = 30.dp
-                        ),
-                        enabled = viewModel.enabled.value,
-                        onClick = { navigate(educationData.id) }) {
-                        ListItem(
-                            colors =
-                            ListItemDefaults.colors(
-                                disabledHeadlineColor = MaterialTheme.colorScheme.secondaryContainer
-                            ),
-                            leadingContent = {
-                                Image(
-                                    modifier = Modifier.size(56.dp),
-                                    painter = painterResource(id = ImageDummy[educationData.id].image),
-                                    contentDescription = "",
-                                    contentScale = ContentScale.Crop
-                                )
-                            },
-                            headlineContent = {
-                                Text(text = educationData.name)
-                            },
-                            supportingContent = {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(
-                                        imageVector = Icons.Default.School,
-                                        contentDescription = ""
-                                    )
-                                    Spacer(modifier = Modifier.padding(4.dp))
-                                    Text(text = educationData.studyProgram)
-                                }
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(
-                                        imageVector = Icons.Default.LocationOn,
-                                        contentDescription = ""
-                                    )
-                                    Spacer(modifier = Modifier.padding(4.dp))
-                                    Text(text = "${educationData.location.city}, ${educationData.location.province}")
-                                }
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(
-                                        imageVector = Icons.Default.Star,
-                                        contentDescription = ""
-                                    )
-                                    Spacer(modifier = Modifier.padding(4.dp))
-                                    Text(text = educationData.rating.toString())
-                                }
-                            },
-                            trailingContent = {
-                                SwitchDashboardAdminDemo(viewModel = viewModel)
-                            }
-                        )
-                    }
+                    CardDashboardAdminScreens(
+                        name = educationData.name,
+                        studyProgram = educationData.studyProgram,
+                        city = educationData.location.city,
+                        province = educationData.location.province,
+                        rating = educationData.rating.toString(),
+                        image = ImageDummy[educationData.id].image,
+                        navigate = { navigate(educationData.id) },
+                        viewModel = viewModel
+                    )
                 }
             }
             item {
                 TextTitleDemo(modifier = Modifier.padding(horizontal = 16.dp), text = "Draft")
+            }
+            item {
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()

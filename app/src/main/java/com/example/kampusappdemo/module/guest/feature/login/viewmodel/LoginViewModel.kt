@@ -93,6 +93,10 @@ class LoginViewModel : ViewModel() {
         studyProgramDialog.value = false
     }
 
+    fun isSignInConfirmed(): Boolean {
+        return email.isNotEmpty() && password.isNotEmpty()
+    }
+
     fun isSignUpStudentConfirmed(): Boolean {
         return password == confirmPassword
                 && user.isNotEmpty()

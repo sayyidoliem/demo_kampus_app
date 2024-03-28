@@ -7,6 +7,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import com.example.kampusappdemo.data.kotpref.SettingPreferences
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -17,6 +18,23 @@ fun TopBarLoginDemo(navigate: () -> Unit) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack, contentDescription = ""
                 )
+            }
+        },
+        title = { /*TODO*/ },
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBarSignInLoginDemo(navigate: () -> Unit) {
+    TopAppBar(
+        navigationIcon = {
+            if (SettingPreferences.typeUser == SettingPreferences.GUEST) {
+                IconButton(onClick = { navigate() }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack, contentDescription = ""
+                    )
+                }
             }
         },
         title = { /*TODO*/ },

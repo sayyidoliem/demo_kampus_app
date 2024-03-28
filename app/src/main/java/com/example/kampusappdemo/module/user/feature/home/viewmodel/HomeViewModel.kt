@@ -1,6 +1,7 @@
 package com.example.kampusappdemo.module.user.feature.home.viewmodel
 
 import android.content.Context
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.kampusappdemo.model.EducationData
 import com.google.gson.Gson
@@ -8,6 +9,14 @@ import com.google.gson.reflect.TypeToken
 import java.io.IOException
 
 class HomeViewModel : ViewModel() {
+
+    var openEditDialog = mutableStateOf(false)
+    fun showDialog() {
+        openEditDialog.value = true
+    }
+    fun hideDialog() {
+        openEditDialog.value = false
+    }
     fun getJsonDataFromAsset(context: Context, fileName: String): String? {
         val jsonString: String
         try {

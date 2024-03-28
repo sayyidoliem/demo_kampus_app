@@ -1,6 +1,7 @@
 package com.example.kampusappdemo.navigation
 
 sealed class Screens(val route: String) {
+    object Splash : Screens("splash")
     object TypeUserSignUp : Screens("typeUserSignUp")
     object SignUpStudent : Screens("signUpStudent")
     object SignUpInstance : Screens("signUpInstance")
@@ -14,7 +15,6 @@ sealed class Screens(val route: String) {
             return "detail?&index=${index}"
         }
     }
-
     object Booking : Screens("booking")
     object Dashboard : Screens("dashboard")
     object DetailDashboard : Screens("detailDashboard?&index={index}"){
@@ -33,23 +33,11 @@ sealed class Screens(val route: String) {
     }
     object Bookmark : Screens("bookmark")
     object Statistic : Screens("statistic")
-    object Profile :
-        Screens("profile?&name={name}&phone={phone}&email={email}&nameInstance={nameInstance}&studyProgram={studyProgram}&city={city}&province={province}") {
-        fun createRoute(
-            name: String?,
-            phone: String?,
-            email: String?,
-            nameInstance: String?,
-            studyProgram: String?,
-            city: String?,
-            province: String?
-        ): String {
-            return "profile?&name=${name}&phone=${phone}&email=${email}&nameInstance=${nameInstance}&studyProgram=${studyProgram}&city=${city}&province=${province}"
-        }
-    }
-
+    object Profile : Screens("profile")
     object Setting : Screens("setting")
-    object Chat : Screens("chat")
+    object ChatUser : Screens("chatUser")
+    object ListChatUser : Screens("listChatUser")
     object ChatAdmin : Screens("chatAdmin")
-    object ListChat : Screens("listChat")
+    object ListChatAdmin : Screens("listChatAdmin")
+    object NeedSignIn :Screens("needSignIn")
 }

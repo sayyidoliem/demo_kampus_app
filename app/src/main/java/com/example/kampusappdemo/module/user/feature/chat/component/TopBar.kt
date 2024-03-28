@@ -30,3 +30,13 @@ fun TopAppBarChatDemo(
         }
     )
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBarListChatUserDemo(navigate : () -> Unit) {
+    CenterAlignedTopAppBar(title = { Text(text = "Chat") }, navigationIcon = {
+        IconButton(onClick = { navigate() }) {
+            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
+        }
+    })
+}

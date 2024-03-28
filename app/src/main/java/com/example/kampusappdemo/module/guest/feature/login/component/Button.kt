@@ -15,10 +15,10 @@ import androidx.compose.ui.unit.dp
 import com.example.kampusappdemo.module.guest.feature.login.viewmodel.LoginViewModel
 
 @Composable
-fun ButtonWithAccountLogin(label: String, icon: Int? = null) {
+fun ButtonWithAccountLogin(label: String, icon: Int? = null, onClick: () -> Unit) {
     OutlinedButton(modifier = Modifier
         .fillMaxWidth()
-        .padding(horizontal = 16.dp), onClick = { /*TODO*/ }) {
+        .padding(horizontal = 16.dp), onClick = {onClick()}) {
         Box(modifier = Modifier.fillMaxWidth()) {
             if (icon != null) {
                 Image(
@@ -34,7 +34,20 @@ fun ButtonWithAccountLogin(label: String, icon: Int? = null) {
 }
 
 @Composable
-fun ButtonRegisterLogin(onClick: () -> Unit, viewModel: LoginViewModel) {
+fun ButtonRegisterUserLogin(onClick: () -> Unit, viewModel: LoginViewModel) {
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .padding(top = 16.dp),
+        enabled = viewModel.isSignUpStudentConfirmed(),
+        onClick = {onClick()}) {
+        Text(text = "Register")
+    }
+}
+
+@Composable
+fun ButtonRegisterInstanceLogin(onClick: () -> Unit, viewModel: LoginViewModel) {
     Button(
         modifier = Modifier
             .fillMaxWidth()

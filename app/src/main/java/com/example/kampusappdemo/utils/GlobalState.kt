@@ -7,4 +7,6 @@ import com.example.kampusappdemo.data.kotpref.SettingPreferences
 
 object GlobalState {
     var isDarkMode by mutableStateOf(SettingPreferences.isDarkMode)
+
+    var isOnBoarding by mutableStateOf(SettingPreferences.isOnBoarding)
 }

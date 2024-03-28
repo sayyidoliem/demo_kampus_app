@@ -16,14 +16,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.kampusappdemo.data.datastore.UserData
 import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.ImageDummy
 import com.example.kampusappdemo.module.user.feature.home.component.CardLastSeenHomeDemo
 import com.example.kampusappdemo.module.user.feature.home.component.CardListHomeDemo
+import com.example.kampusappdemo.module.user.feature.home.component.SignInHomeDialog
 import com.example.kampusappdemo.module.user.feature.home.component.TopAppBarHomeDemo
 import com.example.kampusappdemo.module.user.feature.home.viewmodel.HomeViewModel
 import com.example.kampusappdemo.ui.component.TextHeadlineDemo
@@ -33,6 +36,7 @@ import com.example.kampusappdemo.ui.component.TextSubHeadlineDemo
 fun HomeScreens(
     viewModel: HomeViewModel,
     navigate: (index: Int?) -> Unit,
+    navigateToSignIn: () -> Unit,
     actionTopBar: () -> Unit
 ) {
     val context = LocalContext.current
@@ -41,12 +45,20 @@ fun HomeScreens(
 
     val listLastSeen = viewModel.filterDataByLastSeen(context)
 
-    SettingPreferences.typeUser = SettingPreferences.USER
+    val dataStore = UserData(context)
 
+    val userName = dataStore.getUserName.collectAsState(initial = "")
     Scaffold(
         topBar = {
             TopAppBarHomeDemo(
-                onClick = { actionTopBar() }
+                name = userName.value!!,
+                onClick = {
+                    if (SettingPreferences.typeUser == SettingPreferences.GUEST) {
+                        viewModel.showDialog()
+                    } else {
+                        actionTopBar()
+                    }
+                }
             )
         }
     ) {
@@ -141,6 +153,10 @@ fun HomeScreens(
                 }
             }
         }
-
+    }
+    when {
+        viewModel.openEditDialog.value -> {
+            SignInHomeDialog(navigate = { navigateToSignIn() }, viewModel = viewModel)
+        }
     }
 }
