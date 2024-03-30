@@ -1,7 +1,7 @@
 package com.example.kampusappdemo.module.user.feature.chat.component
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,7 +20,7 @@ fun TopAppBarChatDemo(
         title = { Text(text = "Chat") },
         navigationIcon = {
             IconButton(onClick = { navigate() }) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
+                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "")
             }
         },
         actions = {
@@ -36,7 +36,7 @@ fun TopAppBarChatDemo(
 fun TopAppBarListChatUserDemo(navigate : () -> Unit) {
     CenterAlignedTopAppBar(title = { Text(text = "Chat") }, navigationIcon = {
         IconButton(onClick = { navigate() }) {
-            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
+            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "")
         }
     })
 }

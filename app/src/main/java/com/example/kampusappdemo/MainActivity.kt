@@ -56,6 +56,8 @@ import com.example.kampusappdemo.module.guest.feature.setting.view.SettingsScree
 import com.example.kampusappdemo.module.guest.feature.setting.viewmodel.SettingsViewmodel
 import com.example.kampusappdemo.module.guest.feature.splash.view.SplashScreens
 import com.example.kampusappdemo.module.user.feature.chat.view.ListChatUserScreens
+import com.example.kampusappdemo.module.user.feature.comparison.view.ComparisonScreens
+import com.example.kampusappdemo.module.user.feature.comparison.viewmodel.ComparisonViewModel
 import com.example.kampusappdemo.utils.GlobalState
 
 class MainActivity : ComponentActivity() {
@@ -80,6 +82,7 @@ class MainActivity : ComponentActivity() {
                             @Suppress("UNUSED_EXPRESSION")
                             when (currentRoute) {
                                 Screens.Detail.route -> null
+                                Screens.Comparison.route -> null
                                 Screens.Setting.route -> null
                                 Screens.ChatUser.route -> null
                                 Screens.ListChatUser.route -> null
@@ -195,7 +198,7 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             modifier = Modifier.padding(it),
                             navController = navController,
-                            startDestination = // Screens.ListChatAdmin.route
+                            startDestination =
                             when {
                                 SettingPreferences.isOnBoarding && GlobalState.isOnBoarding -> Screens.Splash.route
                                 SettingPreferences.typeUser == SettingPreferences.USER -> Screens.Home.route
@@ -281,10 +284,33 @@ class MainActivity : ComponentActivity() {
                                 DetailScreens(
                                     modifier = Modifier,
                                     navigateToSignIn = { navController.navigate(Screens.SignIn.route) },
+                                    navigateToComparison = { id ->
+                                        navController.navigate(
+                                            Screens.Comparison.createRoute(
+                                                id,
+                                            )
+                                        )
+                                    },
                                     navigateUp = { navController.navigateUp() },
                                     navigate = { navController.navigate(Screens.ChatUser.route) },
                                     index = index,
                                     viewModel = DetailViewmodel()
+                                )
+                            }
+                            composable(
+                                Screens.Comparison.route,
+                                arguments = listOf(
+                                    navArgument("index") {
+                                        type = NavType.IntType
+                                        defaultValue = 0
+                                    },
+                                ),
+                            ) {
+                                val index = it.arguments!!.getInt("index", 0)
+                                ComparisonScreens(
+                                    index = index,
+                                    navigateUp = { navController.navigateUp() },
+                                    viewModel = ComparisonViewModel()
                                 )
                             }
                             composable(Screens.ChatUser.route) {

@@ -12,7 +12,8 @@ fun FABChat(
     navigate: () -> Unit
 ) {
     FloatingActionButton(
-        containerColor = MaterialTheme.colorScheme.primary, onClick = { navigate() }) {
+        containerColor = MaterialTheme.colorScheme.primary,
+        onClick = { navigate() }) {
         Icon(imageVector = Icons.Default.Message, contentDescription = "chat")
     }
 }

@@ -54,7 +54,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.demomarketapp.R
-import com.example.kampusappdemo.data.datastore.UserData
+import com.example.kampusappdemo.data.local.datastore.UserData
 import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.module.guest.feature.profile.component.BottomAppBarProfileDemo
 import com.example.kampusappdemo.module.guest.feature.profile.component.EditDocumentDialogLogin

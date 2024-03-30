@@ -41,7 +41,8 @@ fun CardListSearchDemo(
     image: Int,
     city: String,
     province: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onFavorite: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -71,7 +72,7 @@ fun CardListSearchDemo(
                     modifier = Modifier
                         .padding(4.dp)
                         .align(Alignment.TopEnd),
-                    onClick = { /*TODO*/ }) {
+                    onClick = { onFavorite() }) {
                     Icon(
                         imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = "",

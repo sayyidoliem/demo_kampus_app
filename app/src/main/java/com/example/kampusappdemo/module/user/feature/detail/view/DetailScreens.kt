@@ -17,7 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Star
@@ -63,6 +63,7 @@ import com.example.kampusappdemo.ui.component.TextTitleDemo
 fun DetailScreens(
     modifier: Modifier,
     navigateToSignIn: () -> Unit,
+    navigateToComparison: (index : Int?) -> Unit,
     navigateUp: () -> Unit,
     navigate: () -> Unit,
     index: Int,
@@ -128,7 +129,7 @@ fun DetailScreens(
                     onClick = { navigateUp() }) {
                     Icon(
                         modifier = Modifier.size(24.dp),
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = ""
                     )
                 }
@@ -218,7 +219,7 @@ fun DetailScreens(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.tertiary,
                 ),
-                onClick = {}
+                onClick = { navigateToComparison(finalDataList.id) }
             ) {
                 Box(
                     modifier = Modifier

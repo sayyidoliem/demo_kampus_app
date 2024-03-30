@@ -1,12 +1,8 @@
-package com.example.kampusappdemo.data.datastore
+package com.example.kampusappdemo.data.local.datastore
 
-import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 
-class UserProfileData() {
+class UserProfileKey() {
     companion object {
         val USER_NAME_KEY = stringPreferencesKey("user_name")
         val USER_EMAIL_KEY = stringPreferencesKey("user_email")

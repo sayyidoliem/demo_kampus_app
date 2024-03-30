@@ -50,7 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.demomarketapp.R
-import com.example.kampusappdemo.data.datastore.UserData
+import com.example.kampusappdemo.data.local.datastore.UserData
 import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.module.guest.feature.profile.viewmodel.ProfileViewModel
 import kotlinx.coroutines.launch

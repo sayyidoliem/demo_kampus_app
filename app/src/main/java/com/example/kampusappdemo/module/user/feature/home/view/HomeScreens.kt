@@ -21,7 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.kampusappdemo.data.datastore.UserData
+import com.example.kampusappdemo.data.local.datastore.UserData
 import com.example.kampusappdemo.data.kotpref.SettingPreferences
 import com.example.kampusappdemo.data.local.database.ImageDummy
 import com.example.kampusappdemo.module.user.feature.home.component.CardLastSeenHomeDemo

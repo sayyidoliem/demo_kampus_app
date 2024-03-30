@@ -24,4 +24,8 @@ class BookmarkViewModel : ViewModel() {
         return Gson().fromJson(jsonFileString, type)
     }
 
+    fun filterDataByIndex(context: Context, index: Any): List<EducationData> {
+        val data = dataList(context)
+        return data.filter { it.id == index}
+    }
 }

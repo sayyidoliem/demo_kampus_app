@@ -1,6 +1,8 @@
-package com.example.kampusappdemo.module.user.feature.search.viewmodel
+package com.example.kampusappdemo.module.user.feature.comparison.viewmodel
 
 import android.content.Context
+import androidx.collection.MutableIntList
+import androidx.collection.mutableIntListOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,12 +13,12 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.IOException
 
-class SearchViewModel() : ViewModel() {
+class ComparisonViewModel : ViewModel() {
 
     var textQuery by mutableStateOf("")
         private set
 
-    fun updateTextQuery(input: String) {
+    fun updateTextQuery(input : String){
         textQuery = input
     }
 
@@ -26,13 +28,43 @@ class SearchViewModel() : ViewModel() {
         isSearching.value = !isSearching.value
     }
 
-    var isFilter by mutableStateOf(false)
+    val comparisonList: MutableIntList =  mutableIntListOf()
 
-    fun onToogleFilter() {
-        isFilter = !isFilter
+    fun addComparison(input : Int){
+        comparisonList.add(input)
     }
 
-    private fun getJsonDataFromAsset(context: Context): String? {//for get local json
+    fun deleteComparison(){
+        comparisonList.clear()
+    }
+
+    var openAddDialog = mutableStateOf(false)
+
+    fun showAddDialog() {
+        openAddDialog.value = true
+    }
+    fun hideAddDialog() {
+        openAddDialog.value = false
+    }
+
+    var openDeleteDialog = mutableStateOf(false)
+
+    fun showDeleteDialog() {
+        openDeleteDialog.value = true
+    }
+    fun hideDeleteDialog() {
+        openDeleteDialog.value = false
+    }
+
+    var openDetailDialog = mutableStateOf(false)
+
+    fun showDetailDialog() {
+        openDetailDialog.value = true
+    }
+    fun hideDetailDialog() {
+        openDetailDialog.value = false
+    }
+    private fun getJsonDataFromAsset(context: Context): String? {
         val jsonString: String
         try {
             jsonString = context.assets.open("data.json").bufferedReader().use { it.readText() }
@@ -43,7 +75,7 @@ class SearchViewModel() : ViewModel() {
         return jsonString
     }
 
-    fun dataList(context: Context): MutableList<EducationData> {//get content from val getjson and use education object
+    fun dataList(context: Context): MutableList<EducationData> {
         val jsonFileString = getJsonDataFromAsset(context = context)
         val type = object : TypeToken<List<EducationData>>() {}.type
         return Gson().fromJson(jsonFileString, type)
@@ -63,7 +95,8 @@ class SearchViewModel() : ViewModel() {
         }.toMutableList()
     }
 
-    data class FilterChipCity(val cities: List<String>)
-
-//    suspend fun saveIndex
+    fun filterDataByIndex(context: Context, index: Any): List<EducationData> {
+        val data = dataList(context)
+        return data.filter { it.id == index }
+    }
 }

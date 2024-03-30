@@ -39,7 +39,8 @@ fun CardListBookmarkDemo(
     ratingCampus: Double,
     image: Int,
     location: Location,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onRemove : () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -68,7 +69,7 @@ fun CardListBookmarkDemo(
                     modifier = Modifier
                         .padding(4.dp)
                         .align(Alignment.TopEnd),
-                    onClick = { /*TODO*/ }) {
+                    onClick = { onRemove() }) {
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = "",

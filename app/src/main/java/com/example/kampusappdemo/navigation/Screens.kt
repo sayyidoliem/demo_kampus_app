@@ -15,6 +15,13 @@ sealed class Screens(val route: String) {
             return "detail?&index=${index}"
         }
     }
+    object Comparison : Screens("comparison?&index={index}"){
+        fun createRoute(
+            index : Int?,
+        ): String{
+            return "comparison?&index=${index}"
+        }
+    }
     object Booking : Screens("booking")
     object Dashboard : Screens("dashboard")
     object DetailDashboard : Screens("detailDashboard?&index={index}"){
